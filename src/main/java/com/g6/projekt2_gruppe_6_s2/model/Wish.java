@@ -8,6 +8,9 @@ public class Wish {
         this.wish = wish;
     }
 
+    public Wish() {
+    }
+
     public String getWish() {
         return wish;
     }
