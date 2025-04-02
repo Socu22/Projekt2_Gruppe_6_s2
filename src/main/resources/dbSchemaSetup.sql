@@ -16,15 +16,8 @@ CREATE TABLE users
 # Table associating user.id to wishlists
 CREATE TABLE listsKeys
 (
-    user INT PRIMARY KEY NOT NULL, FOREIGN KEY (user) references users(id),
-    list INT AUTO_INCREMENT NOT NULL
-);
-
-# Table of associations wishlist-wish
-CREATE TABLE wishList
-(
-    list INT, FOREIGN KEY (list) references listsKeys(list),
-    wish INT, FOREIGN KEY (wish) references wishes(id)
+    list INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    user INT NOT NULL, FOREIGN KEY (user) references users(id)
 );
 
 # Table of each wish
@@ -36,4 +29,11 @@ CREATE TABLE wishes
     description VARCHAR(255),
     link        VARCHAR(255),
     img         VARCHAR(255)
+);
+
+# Table of associations wishlist-wish
+CREATE TABLE wishList
+(
+    list INT, FOREIGN KEY (list) references listsKeys(list),
+    wish INT, FOREIGN KEY (wish) references wishes(id)
 );
