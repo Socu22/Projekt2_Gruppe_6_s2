@@ -7,8 +7,8 @@ USE WishDatabase;
 # Table of each wish
 CREATE TABLE wishes
 (
-    price INT,
-    id    INT   AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    price       INT,
+    wishId      INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     title       VARCHAR(100) NOT NULL,
     description VARCHAR(255),
     link        VARCHAR(255),
@@ -18,22 +18,22 @@ CREATE TABLE wishes
 # Table of users
 CREATE TABLE users
 (
-    id INT   AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    userId   INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     username VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
     img      VARCHAR(255)
 );
 
-# Table associating users to wishLists
-CREATE TABLE userLists
+# Table associating users to wishlists
+CREATE TABLE listHolders
 (
-    list INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    user INT NOT NULL, FOREIGN KEY (user) references users(id)
+    listId INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    userId INT NOT NULL, FOREIGN KEY (userId) references users(userId)
 );
 
 # Table associating wishes to wishlists
 CREATE TABLE wishLists
 (
-    list INT, FOREIGN KEY (list) references userLists(list),
-    wish INT, FOREIGN KEY (wish) references wishes(id)
+    listId INT, FOREIGN KEY (listId) references listHolders(listId),
+    wishId INT, FOREIGN KEY (wishId) references wishes(wishId)
 );
