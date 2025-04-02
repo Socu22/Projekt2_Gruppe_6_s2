@@ -16,11 +16,12 @@ public class WishController {
     WishRepositoryDataBase repo;
     //WishRepository repo;
 
-    @GetMapping("/")
+    @GetMapping("/XXX")
     public String getIndex(Model model){
         var wishList = new ArrayList<>();
         wishList.addAll(repo.getWishList());
         model.addAttribute("wishList",wishList);
         return "index";
     }
+
 }
