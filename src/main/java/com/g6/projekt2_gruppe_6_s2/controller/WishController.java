@@ -16,7 +16,7 @@ public class WishController {
     WishRepositoryDataBase repo;
     //WishRepository repo;
 
-    @GetMapping("/XXX")
+    @GetMapping("/")// change this to connect to a users list somehow
     public String getIndex(Model model){
         var wishList = new ArrayList<>();
         wishList.addAll(repo.getWishList());

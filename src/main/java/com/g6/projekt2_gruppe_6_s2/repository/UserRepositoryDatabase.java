@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Repository
-public class UserRepository {
+public class UserRepositoryDatabase {
     @Autowired
     DataSource dataSource;
     @Autowired
