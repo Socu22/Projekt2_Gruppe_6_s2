@@ -34,6 +34,14 @@ public class WishList {
         }
 
     }
+
+    public WishList(String title) {
+        this.title = title;
+    }
+    public WishList() {
+
+    }
+
     public ArrayList<Wish> getList(){
         return wishes;
     }

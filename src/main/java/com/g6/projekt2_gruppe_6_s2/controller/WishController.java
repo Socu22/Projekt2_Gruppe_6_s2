@@ -14,13 +14,13 @@ public class WishController {
     
     @Autowired
     WishRepositoryDataBase repo;
-    //WishRepository repo;
+    WishRepository repo2;
 
     @GetMapping("/")// change this to connect to a users list somehow
     public String getIndex(Model model){
-        var wishList = new ArrayList<>();
-        wishList.addAll(repo.getWishList());
-        model.addAttribute("wishList",wishList);
+        var wishLists = new ArrayList<>();
+        wishLists.addAll(repo2.getWishLists());
+        model.addAttribute("wishLists",wishLists);
         return "index";
     }
 
