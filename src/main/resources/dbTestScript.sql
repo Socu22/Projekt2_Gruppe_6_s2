@@ -1,5 +1,4 @@
 
-
 USE WishDatabase;
 
 INSERT INTO users (username, password) VALUES

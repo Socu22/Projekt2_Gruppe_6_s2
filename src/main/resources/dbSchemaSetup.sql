@@ -28,12 +28,14 @@ CREATE TABLE users
 CREATE TABLE listHolders
 (
     listId INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    userId INT NOT NULL, FOREIGN KEY (userId) references users(userId)
+    userId INT NOT NULL, FOREIGN KEY (userId) references users(userId),
+    title  VARCHAR(100) -- Title is not key, as may be same for diff lists.
 );
 
 # Table associating wishes to wishlists
 CREATE TABLE wishLists
 (
-    listId INT, FOREIGN KEY (listId) references listHolders(listId),
-    wishId INT, FOREIGN KEY (wishId) references wishes(wishId)
+    userId INT NOT NULL, FOREIGN KEY (userId) references users(userId),
+    listId INT NOT NULL, FOREIGN KEY (listId) references listHolders(listId),
+    wishId INT NOT NULL, FOREIGN KEY (wishId) references wishes(wishId)
 );
