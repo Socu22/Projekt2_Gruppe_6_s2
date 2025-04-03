@@ -19,9 +19,9 @@ public class WishController {
     @GetMapping("/")// change this to connect to a users list somehow
     public String getIndex(Model model){
         var wishLists = new ArrayList<>();
-        wishLists.addAll(repo2.getWishLists());
+        wishLists.addAll(repo.getWishLists(1));
         model.addAttribute("wishLists",wishLists);
-        return "index";
+        return "Profile";
     }
 
 }
