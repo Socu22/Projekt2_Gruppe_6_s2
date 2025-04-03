@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="box" th:each="wishList : ${wishLists}">
+  <div>
+    <label>Description</label>
+    <span th:text="${wishList.title}"></span>
+  </div>
+
+
+</div>
+
+</body>
+</html>
