@@ -8,7 +8,11 @@ import java.util.Comparator;
 import java.util.Locale;
 
 public class WishList {
+
+
     String title;
+    int id;
+
 
     ArrayList<Wish> wishes = new ArrayList<>();
 
@@ -82,4 +86,27 @@ public class WishList {
         pList.addAll(notPList);
         return pList;
     }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public ArrayList<Wish> getWishes() {
+        return wishes;
+    }
+
+    public void setWishes(ArrayList<Wish> wishes) {
+        this.wishes = wishes;
+    }
+
 }
