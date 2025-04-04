@@ -4,9 +4,39 @@
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
+<style>
+  .square {
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    width: calc(25.00% - 40px); /* 3 per row */
+    height: 300px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .square img {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+  .square div {
+    width: 100%;
+  }
+</style>
 <body>
-<div class="box" th:each="wishList : ${wishLists}">
+<div class="square" th:each="wishList : ${wishLists}">
   <div>
+    <a href="index.html">
+      <img  src="https://images.squarespace-cdn.com/content/v1/65d4f4d5f3f72e6e3d20e52a/fac0c84a-24f1-4e70-99d3-afd24f94d556/cumulus-2.jpg?format=1500w" alt="picture not found" />
+    </a>
     <label>Description</label>
     <span th:text="${wishList.id}"></span>
   </div>
