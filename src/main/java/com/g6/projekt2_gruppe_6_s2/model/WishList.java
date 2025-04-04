@@ -1,17 +1,14 @@
 package com.g6.projekt2_gruppe_6_s2.model;
 
-import javax.sound.midi.Soundbank;
-import javax.swing.*;
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Locale;
 
 public class WishList {
 
 
     String title;
-    int id;
+    int listId;
 
 
     ArrayList<Wish> wishes = new ArrayList<>();
@@ -94,12 +91,12 @@ public class WishList {
         this.title = title;
     }
 
-    public int getId() {
-        return id;
+    public int getListId() {
+        return listId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setListId(int listId) {
+        this.listId = listId;
     }
     public ArrayList<Wish> getWishes() {
         return wishes;

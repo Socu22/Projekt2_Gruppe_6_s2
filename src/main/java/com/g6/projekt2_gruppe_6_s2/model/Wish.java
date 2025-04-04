@@ -38,4 +38,7 @@ public class Wish{
         this.title = wish;
     }
     public String getTitle() {return title;}
+    public String toString(){
+        return title;
+    }
 }
