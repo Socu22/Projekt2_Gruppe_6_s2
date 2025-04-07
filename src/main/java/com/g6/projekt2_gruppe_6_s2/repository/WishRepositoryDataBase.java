@@ -66,4 +66,22 @@ public class WishRepositoryDataBase {
         }
         return wishLists;
     }
+
+
+    public void saveWishList(WishList wishList) {
+        String sql = "insert into wishList(listId, wishId) values(?,?)";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, wishList.getListId());
+            statement.setInt(2, 0);
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

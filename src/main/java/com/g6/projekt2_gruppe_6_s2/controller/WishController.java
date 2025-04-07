@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,17 @@ public class WishController {
         }
         model.addAttribute("wishLists",wishLists);
         return "Profile";
+    }
+
+
+    @GetMapping("/saveCreateWishList")
+    public String postCreateWishlist(@RequestParam("listId") int listId,
+                                     @RequestParam("wishId") int wishId)
+    {
+        WishList wishList =null;
+
+        //repo.save(wishList);
+        return "createWishList";
     }
 
 }
