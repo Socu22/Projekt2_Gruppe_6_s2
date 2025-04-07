@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 @Controller
 public class WishController {
@@ -18,7 +19,7 @@ public class WishController {
     WishRepositoryDataBase repo;
     WishRepository repo2;
 
-    @GetMapping("/")// change this to connect to a users list somehow
+    @GetMapping("/Profile")// change this to connect to a users list somehow
     public String getIndex(Model model){
         var wishLists = new ArrayList<WishList>();
         wishLists.addAll(repo.getWishLists(1));
