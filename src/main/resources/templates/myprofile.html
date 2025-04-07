@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - MyWish</title>
+  <style>
+
+    :root {
+      --primary-color: #0081fd;
+      --secondary-color: #0081fd;
+      --background-light: #ffffff;
+      --text-color: #3f3f3f;
+      --light-text: #666666;
+      --border-color: #e0e0e0;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.5;
+      color: var(--text-color);
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      flex-grow: 1;
+    }
+
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      background-color: var(--background-light);
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+    }
+
+    .app-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin: 0;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-color);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+
+    main {
+      padding: 2rem 0;
+      flex-grow: 1;
+    }
+
+    .profile-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .profile-container {
+        grid-template-columns: 1fr 2fr;
+      }
+    }
+
+    .profile-card, .profile-content {
+      background: var(--background-light);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 3px solid var(--primary-color);
+    }
+
+    .profile-name {
+      font-size: 1.5rem;
+      margin: 0 0 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .profile-email {
+      color: var(--light-text);
+      margin: 0;
+    }
+
+    .profile-stats {
+      display: flex;
+      justify-content: space-around;
+      margin: 1.5rem 0;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin: 0;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--light-text);
+      margin: 0;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      margin: 0 0 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .save-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .save-btn:hover {
+      background: var(--secondary-color);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header class="app-header">
+    <h1 class="app-title">MyWish</h1>
+    <img class="Logo" src="img/MyWish-Logo.png" alt="MyWish Logo"/>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="profile.html" class="nav-link active">My Profile</a>
+      <a href="about.html" class="nav-link">About us</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="profile-container">
+      <div class="profile-card">
+        <div class="profile-header">
+          <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-avatar">
+          <h2 class="profile-name">Burger Bob</h2>
+          <p class="profile-email">BurgerBob@hotmail.com</p>
+        </div>
+
+        <div class="profile-stats">
+          <div class="stat-item">
+            <p class="stat-number">24</p>
+            <p class="stat-label">Wishes</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-number">5</p>
+            <p class="stat-label">Wishlists</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-number">12</p>
+            <p class="stat-label">Completed</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-content">
+        <h2 class="section-title">Edit Profile</h2>
+        <form>
+          <div class="group">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" id="name" class="form-input" value="Burger Bob">
+          </div>
+
+          <div class="group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" class="form-input" value="BurgerBob@hotmail.com">
+          </div>
+
+          <div class="group">
+            <label for="bio" class="form-label">Bio</label>
+            <textarea id="bio" class="form-input" rows="4">I love making wishes and wishlists</textarea>
+          </div>
+
+          <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
