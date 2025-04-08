@@ -45,13 +45,13 @@
   }
 </style>
 <body>
+<h1>asdasdasd</h1>
 <div class="container">
 
   <div class="square" th:each="wishList : ${wishLists}">
     <form th:action="@{WishList}" th:method="get">
-    <a type="submit" name="id" value="${wishList.listId}"  href="WishList" style="text-decoration: none; color: inherit;" >
-      <input type="number" name="id">
-      <button type="submit"></button>
+    <a th:href="@{WishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
+
     <div style="padding: 4%">
         <img  src="https://images.squarespace-cdn.com/content/v1/65d4f4d5f3f72e6e3d20e52a/fac0c84a-24f1-4e70-99d3-afd24f94d556/cumulus-2.jpg?format=1500w" alt="picture not found" />
 

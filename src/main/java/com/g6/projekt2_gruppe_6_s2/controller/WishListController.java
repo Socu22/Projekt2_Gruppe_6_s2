@@ -1,5 +1,6 @@
 package com.g6.projekt2_gruppe_6_s2.controller;
 
+import com.g6.projekt2_gruppe_6_s2.model.User;
 import com.g6.projekt2_gruppe_6_s2.model.Wish;
 import com.g6.projekt2_gruppe_6_s2.model.WishList;
 import com.g6.projekt2_gruppe_6_s2.repository.WishRepository;
@@ -18,10 +19,10 @@ public class WishListController {
     WishRepositoryDataBase repo;
 
     @GetMapping("/WishList")// change this to connect to a users list somehow
-    public String getIndex(@RequestParam() int id, Model model){
-
+    public String WishList(@RequestParam("id") int id, Model model){
+        User user = (User)model.getAttribute("activeUser");
         var wishList = new WishList();
-        wishList.setWishes(repo.getWishList(1));
+        wishList.setWishes(repo.getWishList(id ));
 
         model.addAttribute("wishList",wishList);
         return "wishList";
