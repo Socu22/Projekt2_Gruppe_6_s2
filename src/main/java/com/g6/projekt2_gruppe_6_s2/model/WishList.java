@@ -2,6 +2,7 @@ package com.g6.projekt2_gruppe_6_s2.model;
 
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class WishList {
@@ -34,6 +35,12 @@ public class WishList {
             System.out.println(w.prioritized);
         }
 
+    }
+
+    public WishList(String title, int listId, ArrayList<Wish> wishes) {
+        this.title = title;
+        this.listId = listId;
+        this.wishes = wishes;
     }
 
     public WishList(String title) {
@@ -104,6 +111,14 @@ public class WishList {
 
     public void setWishes(ArrayList<Wish> wishes) {
         this.wishes = wishes;
+    }
+
+    public ArrayList<Integer> getWishesIds() {
+        ArrayList<Integer> wishIds =new ArrayList<>();
+        for (Wish wish : wishes){
+            wishIds.add(wish.getId());
+        }
+        return wishIds;
     }
 
 }

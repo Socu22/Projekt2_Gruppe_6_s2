@@ -69,14 +69,18 @@ public class WishRepositoryDataBase {
     }
 
     // Create a new wishlist and associate wishes with it
-    public void createWishlist(int userId, List<Integer> wishIds) throws SQLException {
+    public int createWishlist(int userId) throws SQLException {
         String insertListHolderSQL = "INSERT INTO listHolders (userId) VALUES (?)";
         String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
+        String insertWishesSQL = "INSERT INTO wishes (wishId,title) VALUES (?,?)";
 
+        List<Integer> wishIds = List.of(getNextWishId());
+        int listId = 0;
         try (Connection conn = dataSource.getConnection();
              PreparedStatement listHolderStmt = conn.prepareStatement(insertListHolderSQL,
                      Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement wishListStmt = conn.prepareStatement(insertWishListSQL)) {
+             PreparedStatement wishListStmt = conn.prepareStatement(insertWishListSQL);
+             PreparedStatement wishesStmt = conn.prepareStatement(insertWishesSQL)) {
 
             // Insert into listHolders
             listHolderStmt.setInt(1, userId);
@@ -85,39 +89,78 @@ public class WishRepositoryDataBase {
             // Get the generated listId
             try (ResultSet generatedKeys = listHolderStmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    int listId = generatedKeys.getInt(1);
+                    listId = generatedKeys.getInt("listId");
 
                     // Insert wishes into wishLists
                     for (int wishId : wishIds) {
                         wishListStmt.setInt(1, listId);
                         wishListStmt.setInt(2, wishId);
                         wishListStmt.addBatch();
+
+                        wishesStmt.setInt(1, wishId);
+                        wishesStmt.setString(2, "wishestest");
+                        wishesStmt.addBatch();
                     }
                     wishListStmt.executeBatch();
+                    wishesStmt.executeBatch();
+                }
+            }
+        }
+        return listId;
+    }
+
+    public int getNextWishId() throws SQLException {
+        String selectMaxWishIdSQL = "SELECT MAX(wishId) FROM wishes";
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(selectMaxWishIdSQL);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                int maxWishId = rs.getInt(1);
+                return maxWishId + 1; // Return the next available wishId
+            } else {
+                return 1; // If no wishes exist, start with 1
+            }
+        }
+    }
+
+
+    // Save changes to the database
+    public void saveWishlist(int userId, WishList usersWishList) throws SQLException {
+        String selectListHolderSQL = "SELECT listId FROM listHolders WHERE userId = ?";
+        String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
+        String insertWishesSQL = "INSERT INTO wishes (wishId, title) VALUES (?, ?)";
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement listHolderStmt = conn.prepareStatement(selectListHolderSQL);
+             PreparedStatement wishListStmt = conn.prepareStatement(insertWishListSQL);
+             PreparedStatement wishesStmt = conn.prepareStatement(insertWishesSQL)) {
+
+            listHolderStmt.setInt(1, userId);
+            try (ResultSet resultSet = listHolderStmt.executeQuery()) {
+                if (resultSet.next()) {
+                    int listId = resultSet.getInt("listId");
+
+                    // Assuming wishIds is a field in usersWishList
+                    for (int wishId : usersWishList.getWishesIds()) {
+                        wishListStmt.setInt(1, listId);
+                        wishListStmt.setInt(2, wishId);
+                        wishListStmt.addBatch();
+
+                        wishesStmt.setInt(1, wishId);
+                        wishesStmt.setString(2, "wishestest");
+                        wishesStmt.addBatch();
+                    }
+                    wishListStmt.executeBatch();
+                    wishesStmt.executeBatch();
+                } else {
+                    throw new SQLException("No listId found for userId: " + userId);
                 }
             }
         }
     }
-    // Save changes to the database
-    public void saveWishlist(int listId, List<Integer> wishIdsToAdd, List<Integer> wishIdsToRemove) throws SQLException {
-        try (Connection conn = dataSource.getConnection()) {
-            conn.setAutoCommit(false); // Start a transaction
-            try {
-                // Remove wishes
-                removeWishesFromWishlist(listId, wishIdsToRemove);
-
-                // Add wishes
-                addWishesToWishlist(listId, wishIdsToAdd);
-
-                conn.commit(); // Commit the transaction
-            } catch (SQLException e) {
-                conn.rollback(); // Rollback in case of an error
-                throw e;
-            }
-        }
-    }
-
-    // Add wishes to an existing wishlist
+    // Add wishes to an existing wishlist ------- outdated
     public void addWishesToWishlist(int listId, List<Integer> wishIds) throws SQLException {
         String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
 
@@ -133,7 +176,7 @@ public class WishRepositoryDataBase {
         }
     }
 
-    // Remove wishes from an existing wishlist
+    // Remove wishes from an existing wishlist ------outdated
     public void removeWishesFromWishlist(int listId, List<Integer> wishIds) throws SQLException {
         String deleteWishListSQL = "DELETE FROM wishLists WHERE listId = ? AND wishId = ?";
 
@@ -149,7 +192,7 @@ public class WishRepositoryDataBase {
         }
     }
 
-    // Delete a wishlist and its associations
+    // Delete a wishlist and its associations ---- outdated
     public void deleteWishlist(int listId) throws SQLException {
         String deleteWishListSQL = "DELETE FROM wishLists WHERE listId = ?";
         String deleteListHolderSQL = "DELETE FROM listHolders WHERE listId = ?";
@@ -167,6 +210,9 @@ public class WishRepositoryDataBase {
             listHolderStmt.executeUpdate();
         }
     }
+
+
+    // outdated
     public List<Map<String, Object>> showWishlist(int listId) throws SQLException {
         String selectWishListSQL = "SELECT w.wishId, w.title, w.description, w.price, w.link, w.img " +
                 "FROM wishLists wl " +
