@@ -120,5 +120,8 @@ public class WishList {
         }
         return wishIds;
     }
+    public Wish getWish(int id){
+        return wishes.get(id);
+    }
 
 }

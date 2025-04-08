@@ -15,13 +15,13 @@ public class Wish{
     String link;
     boolean prioritized;
 
-    public Wish(String title, String description, String image, double price, String link, boolean prioritized) {
+    public Wish(String title, String description, String image, double price, String link, int id) {
         this.title = title;
         this.description = description;
         this.image = image;
         this.price = price;
         this.link = link;
-        this.prioritized = prioritized;
+        this.id = id;
     }
     public Wish(String title) {
         this.title = title;

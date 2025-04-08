@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="${wish.id}"></h1>
+<h1 th:text="${wish.title}"></h1>
+<h1 th:text="${wish.description}"></h1>
+<h1 th:text="${wish.link}"></h1>
+<img src="${wish.image}" alt="picture not found">
+<h1 th:text="${wish.price}"></h1>
+</body>
+</html>

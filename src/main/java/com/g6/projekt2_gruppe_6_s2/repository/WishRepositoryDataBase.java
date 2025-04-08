@@ -38,8 +38,10 @@ public class WishRepositoryDataBase {
                  PreparedStatement statement = connection.prepareStatement(sql);
                  ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    Wish wish = new Wish();
-                    wish.setWish(resultSet.getString("title"));
+                    Wish wish = new Wish(resultSet.getString("title"),resultSet.getString("description"),
+                            resultSet.getString("img"),resultSet.getInt("price"),
+                            resultSet.getString("link"), resultSet.getInt("wishId"));
+
                     wishList.add(wish);
                 }
             } catch (SQLException e) {
@@ -66,6 +68,24 @@ public class WishRepositoryDataBase {
             e.printStackTrace();
         }
         return wishLists;
+    }
+    public Wish getWish(int wishId) {
+        Wish wish = new Wish();
+        String sql = "SELECT * FROM wishes WHERE wishId = " + wishId + ";";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+
+                wish = new Wish(resultSet.getString("title"),resultSet.getString("description"),
+                        resultSet.getString("img"),resultSet.getInt("price"),
+                        resultSet.getString("link"), resultSet.getInt("wishId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return wish;
     }
 
     // Create a new wishlist and associate wishes with it
