@@ -89,7 +89,7 @@ public class WishRepositoryDataBase {
             // Get the generated listId
             try (ResultSet generatedKeys = listHolderStmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    listId = generatedKeys.getInt("listId");
+                    listId = generatedKeys.getInt(1);
 
                     // Insert wishes into wishLists
                     for (int wishId : wishIds) {
@@ -101,8 +101,8 @@ public class WishRepositoryDataBase {
                         wishesStmt.setString(2, "wishestest");
                         wishesStmt.addBatch();
                     }
-                    wishListStmt.executeBatch();
                     wishesStmt.executeBatch();
+                    wishListStmt.executeBatch();
                 }
             }
         }

@@ -60,7 +60,7 @@ public class WishController {
     }
 
 
-    @PostMapping("/saveCreateWishList")
+    @GetMapping("/saveCreateWishList")
     public String postCreateWishlist(@RequestParam("title") String title ) throws SQLException {
 
         int listId = repo.createWishlist(1);
@@ -70,7 +70,7 @@ public class WishController {
 
         WishList wishListInstance = new WishList(title,listId,wishList);
         repo.saveWishlist(1,wishListInstance);
-        return "redirect:/";
+        return "profile";
     }
 
 }
