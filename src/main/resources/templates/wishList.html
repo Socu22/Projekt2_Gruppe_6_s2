@@ -47,22 +47,15 @@
 <body>
 <div class="container">
 
-  <div class="square" th:each="wishList : ${wishLists}">
-    <form th:action="@{WishList}" th:method="get">
-    <a type="submit" name="id" value="${wishList.listId}"  href="WishList" style="text-decoration: none; color: inherit;" >
-      <input type="number" name="id">
-      <button type="submit"></button>
-    <div style="padding: 4%">
+  <div class="square" th:each="wish : ${wishList}">
+    <a href="https://dinlink.dk" style="text-decoration: none; color: inherit;" >
+      <div style="padding: 4%">
         <img  src="https://images.squarespace-cdn.com/content/v1/65d4f4d5f3f72e6e3d20e52a/fac0c84a-24f1-4e70-99d3-afd24f94d556/cumulus-2.jpg?format=1500w" alt="picture not found" />
 
-      <label>ønskeliste: </label>
-      <span th:text="${wishList.listId}"></span>
-      <div th:each="wish : ${wishList.getWishes()}">
-        <span th:text="${wish.title}" ></span>
+        <label>ønskeliste: </label>
+        <span th:text="${wish.}"></span>
       </div>
-    </div>
     </a>
-    </form>
   </div>
 
 

@@ -34,7 +34,7 @@ public class WishController {
             wishLists.get(i).setWishes(list);
         }
         model.addAttribute("wishLists",wishLists);
-        return "Profile";
+        return "profile";
     }
 
 
