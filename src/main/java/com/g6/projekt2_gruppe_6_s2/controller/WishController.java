@@ -12,9 +12,12 @@ import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -51,14 +54,17 @@ public class WishController {
     }
 
 
-    @GetMapping("/saveCreateWishList")
-    public String postCreateWishlist(@RequestParam("listId") int listId,
-                                     @RequestParam("wishId") int wishId)
-    {
-        WishList wishList =null;
+    @PostMapping("/saveCreateWishList")
+    public String postCreateWishlist(@RequestParam("title") String title ) throws SQLException {
 
-        //repo.save(wishList);
-        return "createWishList";
+        int listId = repo.createWishlist(1);
+        ArrayList<Wish> wishList = new ArrayList<>();
+        wishList.add(new Wish(repo.getNextWishId(),"t2"));
+
+
+        WishList wishListInstance = new WishList(title,listId,wishList);
+        repo.saveWishlist(1,wishListInstance);
+        return "redirect:/";
     }
 
 }
