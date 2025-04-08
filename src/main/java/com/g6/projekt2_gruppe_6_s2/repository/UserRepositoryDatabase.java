@@ -40,28 +40,40 @@ public class UserRepositoryDatabase {
 
         return userList;
     }
-    public User getUserWithUsernamePassword(String username, String password){
+
+    public User getUserWithUsernamePassword(String username, String password)
+            throws SQLException, IllegalArgumentException
+    {
         User user = null;
         String sql = "SELECT * FROM users WHERE username = ? and password=?";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
+             PreparedStatement statement = connection.prepareStatement(sql))
+        {
             statement.setString(1, username);
             statement.setString(2, password);
 
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
+            try (ResultSet resultSet = statement.executeQuery())
+            {
+                if (resultSet.next())
+                {
                     user = new User();
-                    user.setId(resultSet.getInt("id"));
+
+                    user.setId      (resultSet.getInt   ("userId"));
                     user.setUsername(resultSet.getString("username"));
                     user.setPassword(resultSet.getString("password"));
-                    user.setImgPath(resultSet.getString("img"));
-
+                    user.setImgPath (resultSet.getString("img"));
+                }
+                else
+                {
+                    throw new  IllegalArgumentException("Incorrect Username or Password");
                 }
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
+            throw e;
         }
 
         return user;
