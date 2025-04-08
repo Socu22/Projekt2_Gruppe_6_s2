@@ -35,7 +35,6 @@ CREATE TABLE listHolders
 # Table associating wishes to wishlists
 CREATE TABLE wishLists
 (
-    userId INT NOT NULL, FOREIGN KEY (userId) references users(userId),
     listId INT NOT NULL, FOREIGN KEY (listId) references listHolders(listId),
     wishId INT NOT NULL, FOREIGN KEY (wishId) references wishes(wishId)
 );
