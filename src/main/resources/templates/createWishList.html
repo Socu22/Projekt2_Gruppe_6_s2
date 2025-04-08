@@ -48,7 +48,7 @@
 <body>
 <div class="container">
     <h2>Create a New Wishlist</h2>
-    <form th:action="@{/saveCreateWishList}" method="get">
+    <form th:action="@{/saveCreateWishList}" th:method="get">
         <div class="form-group">
             <label for="title">Wishlist Title:</label>
             <input type="text" id="title" name="title" required>

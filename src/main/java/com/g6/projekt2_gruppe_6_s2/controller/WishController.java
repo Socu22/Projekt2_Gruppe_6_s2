@@ -54,6 +54,12 @@ public class WishController {
     }
 
 
+    @GetMapping("/getCreateWishList")
+    public String GetCreateWishList() {
+        return "createWishList";
+    }
+
+
     @PostMapping("/saveCreateWishList")
     public String postCreateWishlist(@RequestParam("title") String title ) throws SQLException {
 
