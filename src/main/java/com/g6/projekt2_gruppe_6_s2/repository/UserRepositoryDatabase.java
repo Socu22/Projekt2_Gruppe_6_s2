@@ -66,14 +66,14 @@ public class UserRepositoryDatabase {
                 }
                 else
                 {
-                    throw new  IllegalArgumentException("Incorrect Username or Password");
+                    throw new  IllegalArgumentException("Incorrect Username or Password.");
                 }
             }
         }
         catch (SQLException e)
         {
             e.printStackTrace();
-            throw e;
+            throw new SQLException("Failed to Connect to Database.");
         }
 
         return user;

@@ -48,7 +48,7 @@ public class UserController
                 model.addAttribute("loginError", false);
                 model.addAttribute("loginMsg", "");
 
-                return "profile";
+                return "redirect:/Profile";
             }
         }
         catch (SQLException|IllegalArgumentException e)
@@ -59,15 +59,4 @@ public class UserController
 
         return "login"; // Return to the login page with an error message
     }
-
-    private void success(User user, HttpSession session)
-    {
-
-    }
-
-    private void faliure(User user)
-    {
-
-    }
-
 }
