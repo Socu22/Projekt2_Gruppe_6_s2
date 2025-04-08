@@ -3,7 +3,6 @@ package com.g6.projekt2_gruppe_6_s2.controller;
 import com.g6.projekt2_gruppe_6_s2.model.User;
 import com.g6.projekt2_gruppe_6_s2.repository.UserRepositoryDatabase;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +20,8 @@ public class UserController
     UserRepositoryDatabase repoUser;
 
     @GetMapping("/Login")
-    public String login(Model model)
+    public String login()
     {
-        model.addAttribute("loginMsg", "Hello");
         return "login";
     }
 
@@ -45,14 +43,15 @@ public class UserController
                 HttpSession session = request.getSession();
 
                 model.addAttribute("activeUser", user);
-                session.setAttribute("userId", user.getId());
+                session.setAttribute("activeUser", user);
 
-                System.out.println("Works");
+                model.addAttribute("loginError", false);
+                model.addAttribute("loginMsg", "");
 
-                return "myprofile";
+                return "profile";
             }
         }
-        catch (SQLException e)
+        catch (SQLException|IllegalArgumentException e)
         {
             model.addAttribute("loginError", true);
             model.addAttribute("loginMsg", e.getMessage());
