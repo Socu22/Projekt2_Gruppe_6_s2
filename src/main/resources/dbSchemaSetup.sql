@@ -29,7 +29,7 @@ CREATE TABLE listHolders
 (
     listId INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     userId INT NOT NULL, FOREIGN KEY (userId) references users(userId),
-    name   VARCHAR(100) -- Title is not key, as may be same for diff lists.
+    title  VARCHAR(100) -- Title is not key, as may be same for diff lists.
 );
 
 # Table associating wishes to wishlists
