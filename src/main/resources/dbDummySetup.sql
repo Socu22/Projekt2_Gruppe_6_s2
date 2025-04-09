@@ -51,3 +51,6 @@ SELECT listId, wishId FROM listHolders, wishes WHERE userId = 2 AND wishId > 6 A
 
 INSERT INTO wishLists (listId, wishId)
 SELECT listId, wishId FROM listHolders, wishes WHERE userId = 4 AND wishId > 14;
+
+INSERT INTO wishLists (listId, wishId)
+SELECT listId, wishId FROM listHolders, wishes WHERE userId = 4 AND wishes.title = 'Flamingo';
