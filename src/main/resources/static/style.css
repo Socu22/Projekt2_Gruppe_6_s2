@@ -184,4 +184,27 @@ main {
   justify-content: center;
 }
 
+.simple-footer {
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  border-top: 2px solid #0081fd;
+  margin-top: 2rem;
+}
+
+.simple-footer a {
+  color: #0081fd;
+  text-decoration: none;
+}
+
+.simple-footer a:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
 
