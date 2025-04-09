@@ -68,8 +68,11 @@ public class WishController {
         wishList.add(new Wish(repo.getNextWishId(),"t2"));
 
 
+
+
         WishList wishListInstance = new WishList(title,listId,wishList);
-        repo.saveWishlist(1,wishListInstance);
+
+        repo.saveWishlist(1,listId,wishListInstance);
         return "profile";
     }
 
