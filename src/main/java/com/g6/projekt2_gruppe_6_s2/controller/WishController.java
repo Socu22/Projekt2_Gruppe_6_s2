@@ -76,4 +76,6 @@ public class WishController {
         return "profile";
     }
 
+
+
 }

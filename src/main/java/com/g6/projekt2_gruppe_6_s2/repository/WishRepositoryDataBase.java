@@ -116,9 +116,9 @@ public class WishRepositoryDataBase {
             {
                 if (generatedKeys.next())
                 {
-                    listId = generatedKeys.getInt(1);
+                    listId = generatedKeys.getInt(1); // listId that gets returned
 
-                    // Insert wish into wishes
+                    /*// Insert wish into wishes
                     for (int wishId : wishIds)
                     {
 
@@ -138,6 +138,8 @@ public class WishRepositoryDataBase {
                     }
 
                     wishListStmt.executeBatch();
+
+                     */
                 }
             }
         }
@@ -161,7 +163,7 @@ public class WishRepositoryDataBase {
     }
 
 
-    // Save changes to the database
+    // Save changes to the database - kind of depending on listId from createwislist method
     public void saveWishlist(int userId, int _listId, WishList usersWishList) throws SQLException {
         String selectListHolderSQL = "SELECT listId FROM listHolders WHERE userId = ? AND listId = ?";
         String insertWishesSQL = "INSERT INTO wishes (title) VALUES (?)";
