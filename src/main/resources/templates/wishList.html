@@ -11,13 +11,14 @@
     border-radius: 8px;
     margin: 20px;
     width: calc(10.00% - 40px); /* 3 per row */
-    height: 100%;
+    height: 290px;
     box-sizing: border-box;
     display: inline-block;
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
   }
   .square img {
     width: 93%;
@@ -50,16 +51,31 @@
   <div class="square" th:each="wish : ${wishList.getWishes()}">
     <form th:action="@{Wish}" th:method="get">
     <a th:href="@{Wish(id=${wish.id})}" style="text-decoration: none; color: inherit;" >
-      <div style="padding: 4%">
+      <div style="padding: 4%;">
         <img  src="https://images.squarespace-cdn.com/content/v1/65d4f4d5f3f72e6e3d20e52a/fac0c84a-24f1-4e70-99d3-afd24f94d556/cumulus-2.jpg?format=1500w" alt="picture not found" />
-        <span th:text="${wish.title}"></span>
-        <label>ønskeliste: </label>
+        <div style="width: 95%">
+        <span th:text="${wish.title}"  ></span>
+        <span th:text="${wish.link}" ></span>
+        <br>
+        <span th:text="${wish.price}" > </span>
+        <span> kr.</span>
+        <br>
+        <span th:text="${wish.description}" ></span>
+        </div>
+
       </div>
     </a>
     </form>
   </div>
 
+<div class="square" >
+  <a th:href="@{getCreateWishList(id=${wishList.getListId()})}" style="text-decoration: none; color: inherit;" >
+    <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
+      <img  src="https://www.pngall.com/wp-content/uploads/10/Plus-Symbol-Vector-PNG-HD-Image.png" alt="picture not found"  />
 
+    </div>
+  </a>
+</div>
 
 </div>
 
