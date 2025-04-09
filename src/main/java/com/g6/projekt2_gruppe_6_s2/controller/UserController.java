@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 @Controller
 public class UserController
@@ -31,7 +32,6 @@ public class UserController
                          HttpServletRequest request,
                          Model model)
     {
-        model.addAttribute("loginError", false);
         model.addAttribute("loginMsg", "");
 
         try
@@ -42,24 +42,23 @@ public class UserController
             {
                 HttpSession session = request.getSession();
 
-                model.addAttribute("activeUser", user);
                 session.setAttribute("activeUser", user);
 
-                model.addAttribute("loginError", false);
-                model.addAttribute("loginMsg", "");
+                System.out.println(LocalDateTime.now() + "\u001B[32m  LOGN\u001B[35m user\u001B[0m ---- [" + username + "]");
 
                 return "redirect:/Profile";
             }
+            System.out.println(LocalDateTime.now() + "\u001B[32m  LOGN\u001B[35m fail\u001B[0m ---- [" + username + "]");
         }
         catch (SQLException|IllegalArgumentException e)
         {
-            model.addAttribute("loginError", true);
             model.addAttribute("loginMsg", e.getMessage());
         }
 
         return "login"; // Return to the login page with an error message
     }
 
+    @PostMapping("/Register")
     public String register(@RequestParam("username") String username,
                            @RequestParam("password") String password,
                            HttpServletRequest request,
@@ -69,28 +68,22 @@ public class UserController
 
         try
         {
-            User user = userRepo.getUser(username, password);
+            User user = userRepo.addUser(username, password);
 
-            if (user == null)
+            if (user != null)
             {
-
-                user = userRepo.getUser(username, password);
-
                 HttpSession session = request.getSession();
 
-                model.addAttribute("activeUser", user);
                 session.setAttribute("activeUser", user);
 
-                model.addAttribute("loginError", false);
-                model.addAttribute("loginMsg", "");
+                System.out.println(LocalDateTime.now() + "\u001B[32m  RGST\u001B[35m user\u001B[0m ---- [" + username + "]");
 
                 return "redirect:/Profile";
             }
         }
         catch (SQLException|IllegalArgumentException e)
         {
-            model.addAttribute("loginError", true);
-            model.addAttribute("loginMsg", e.getMessage());
+            model.addAttribute("registerMsg", e.getMessage());
         }
 
         return "login"; // Return to the login page with an error message

@@ -37,7 +37,8 @@ public class UserRepositoryDatabase
 
                 user.setId      (resultSet.getInt   ("id"));
                 user.setUsername(resultSet.getString("username"));
-                user.setImgPath (resultSet.getString("imgPath"));
+                //                                    not giving the passwords ;)
+                user.setImgPath (resultSet.getString("img"));
 
                 userList.add(user);
             }
@@ -54,7 +55,8 @@ public class UserRepositoryDatabase
     public User addUser(String username, String password)
             throws SQLException
     {
-        if(hasUser(username)) return null; // abort if user already exists
+        // abort if user already exists
+        if(hasUser(username)) throw new IllegalArgumentException("User already exists.");
 
         String sql = "INSERT INTO users (username, password) VALUE ( ? , ? )";
 
@@ -100,7 +102,7 @@ public class UserRepositoryDatabase
                 }
                 else
                 {
-                    throw new  IllegalArgumentException("Incorrect Username or Password.");
+                    throw new IllegalArgumentException("Incorrect Username or Password.");
                 }
             }
         }
@@ -133,7 +135,6 @@ public class UserRepositoryDatabase
             e.printStackTrace();
             throw new SQLException("Failed to Connect to Database.");
         }
-
 
         return false;
     }
