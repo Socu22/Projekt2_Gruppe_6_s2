@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{style.css}">
     <title>Login page</title>
 </head>
 <body>
-<h1>Login page</h1>
-<form th:action="@{/VerifyLogin}" method="post">
-    <label for="username">Username</label>:
-    <input type="text" id="username" name="username" autofocus="autofocus"  required/> <br />
-    <label for="password">Password</label>:
-    <input type="password" id="password" name="password" required /> <br />
-    <input type="submit" value="Log in" />
-</form>
+<div class="container">
+    <header class="app-header">
+        <h1 class="app-title">MyWish</h1>
+        <img class="Logo" src="https://lh3.googleusercontent.com/d/1h1WFq3KsJnBg8I54_eCUJsIwEgcp46Sc"/>
+        <nav class="main-nav">
+            <a href=""          class="nav-link">Home</a>
+            <a href=""          class="nav-link active">Login</a>
+            <a href="AboutUs"   class="nav-link">About Us</a>
+        </nav>
+    </header>
 
-<p th:text="${loginMsg}"></p>
+    <main>
+        <h2 class="section-title">Please enter your username and password</h2>
+        <form th:action="@{/VerifyLogin}" method="post">
+            <label for="username">Username</label>:
+            <input type="text" id="username" name="username" autofocus="autofocus"  required/> <br/>
+            <label for="password">Password</label>:
+            <input type="password" id="password" name="password" required /> <br/>
+            <input type="submit" value="Log in" />
+        </form>
+
+        <p th:text="${loginMsg}"></p>
+
+        <h2 class="section-title">Or register</h2>
+        <form th:action="@{/Register}" method="post">
+            <label for="username">Username</label>:
+            <input type="text" id="username" name="username" autofocus="autofocus"  required/> <br/>
+            <label for="password">Password</label>:
+            <input type="password" id="password" name="password" required /> <br/>
+            <input type="submit" value="Register" />
+        </form>
+
+        <p th:text="${registerMsg}"></p>
+    </main>
+</div>
 </body>
 </html>
+
