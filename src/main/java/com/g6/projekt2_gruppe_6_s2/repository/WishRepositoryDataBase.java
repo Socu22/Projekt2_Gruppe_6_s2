@@ -92,15 +92,16 @@ public class WishRepositoryDataBase {
     public int createWishlist(int userId) throws SQLException {
         String insertListHolderSQL = "INSERT INTO listHolders (userId) VALUES (?)";
         String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
-        String insertWishesSQL = "INSERT INTO wishes (wishId,title) VALUES (?,?)";
+        String insertWishesSQL = "INSERT INTO wishes (title) VALUES (?)";
 
-        List<Integer> wishIds = List.of(getNextWishId());
+        // Create a new wish with a unique title
+        String wishTitle = "wishestest";
         int listId = 0;
+
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement listHolderStmt = conn.prepareStatement(insertListHolderSQL,
-                     Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement listHolderStmt = conn.prepareStatement(insertListHolderSQL, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement wishListStmt = conn.prepareStatement(insertWishListSQL);
-             PreparedStatement wishesStmt = conn.prepareStatement(insertWishesSQL)) {
+             PreparedStatement wishesStmt = conn.prepareStatement(insertWishesSQL, Statement.RETURN_GENERATED_KEYS)) {
 
             // Insert into listHolders
             listHolderStmt.setInt(1, userId);
@@ -111,23 +112,27 @@ public class WishRepositoryDataBase {
                 if (generatedKeys.next()) {
                     listId = generatedKeys.getInt(1);
 
-                    // Insert wishes into wishLists
-                    for (int wishId : wishIds) {
-                        wishListStmt.setInt(1, listId);
-                        wishListStmt.setInt(2, wishId);
-                        wishListStmt.addBatch();
+                    // Insert the wish into the wishes table
+                    wishesStmt.setString(1, wishTitle);
+                    wishesStmt.executeUpdate();
 
-                        wishesStmt.setInt(1, wishId);
-                        wishesStmt.setString(2, "wishestest");
-                        wishesStmt.addBatch();
+                    // Get the generated wishId
+                    try (ResultSet wishKeys = wishesStmt.getGeneratedKeys()) {
+                        if (wishKeys.next()) {
+                            int wishId = wishKeys.getInt(1);
+
+                            // Insert the wish into the wishLists table
+                            wishListStmt.setInt(1, listId);
+                            wishListStmt.setInt(2, wishId);
+                            wishListStmt.executeUpdate();
+                        }
                     }
-                    wishesStmt.executeBatch();
-                    wishListStmt.executeBatch();
                 }
             }
         }
         return listId;
     }
+
 
     public int getNextWishId() throws SQLException {
         String selectMaxWishIdSQL = "SELECT MAX(wishId) FROM wishes";
