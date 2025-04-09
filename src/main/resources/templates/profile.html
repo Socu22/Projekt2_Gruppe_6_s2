@@ -10,14 +10,15 @@
     border: 2px solid #ccc;
     border-radius: 8px;
     margin: 20px;
-    width: calc(25.00% - 40px); /* 3 per row */
-    height: 100%;
+    width: calc(18.00% - 40px); /* 3 per row */
+    height: 300px;
     box-sizing: border-box;
     display: inline-block;
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
   }
   .square img {
     width: 93%;
@@ -45,11 +46,11 @@
   }
 </style>
 <body>
-<h1>asdasdasd</h1>
 <div class="container">
 
   <div class="square" th:each="wishList : ${wishLists}">
-    <form th:action="@{WishList}" th:method="get">
+    <form th:action="@{WishList}" th:method="get">+
+
     <a th:href="@{WishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
 
     <div style="padding: 4%">
@@ -58,6 +59,7 @@
       <label>ønskeliste: </label>
       <span th:text="${wishList.listId}"></span>
       <div th:each="wish : ${wishList.getWishes()}">
+        <span> -</span>
         <span th:text="${wish.title}" ></span>
       </div>
     </div>
@@ -65,7 +67,14 @@
     </form>
   </div>
 
+  <div class="square" >
+    <a href="getCreateWishList" style="text-decoration: none; color: inherit;" >
+      <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
+        <img  src="https://www.pngall.com/wp-content/uploads/10/Plus-Symbol-Vector-PNG-HD-Image.png" alt="picture not found"  style="height: 50%; width: 50%;"/>
 
+      </div>
+    </a>
+  </div>
 
 </div>
 
