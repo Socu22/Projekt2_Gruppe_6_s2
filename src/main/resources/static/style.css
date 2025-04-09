@@ -183,28 +183,38 @@ main {
   align-items: center;
   justify-content: center;
 }
-
 .simple-footer {
-  background-color: white;
-  padding: 1rem;
+  background-color: var(--primary-color); /* Changed to blue using your primary color variable */
+  padding: 2rem 1rem;
   text-align: center;
-  border-top: 2px solid #0081fd;
   margin-top: 2rem;
+  color: white; /* White text for better contrast on blue */
+  box-shadow: var(--shadow-md); /* Matching your header's shadow */
 }
 
 .simple-footer a {
-  color: #0081fd;
+  color: white; /* White links for better contrast */
   text-decoration: none;
+  font-weight: 500; /* Matching your nav link style */
+  transition: opacity 0.2s;
 }
 
 .simple-footer a:hover {
+  opacity: 0.8;
   text-decoration: underline;
 }
 
 .copyright {
-  color: #666;
+  color: rgba(255, 255, 255, 0.8); /* Lighter white for copyright */
   font-size: 0.9rem;
   margin-top: 1rem;
 }
 
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
 
