@@ -184,18 +184,42 @@ main {
   justify-content: center;
 }
 .simple-footer {
-  background-color: var(--primary-color); /* Changed to blue using your primary color variable */
+  background-color: var(--primary-color);
+  color: white;
+  width: 100%;
   padding: 2rem 1rem;
+  box-shadow: var(--shadow-md);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+}
+
+.footer-content {
   text-align: center;
-  margin-top: 2rem;
-  color: white; /* White text for better contrast on blue */
-  box-shadow: var(--shadow-md); /* Matching your header's shadow */
+
+}
+
+.footer-contact {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-contact p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .simple-footer a {
-  color: white; /* White links for better contrast */
+  color: white;
   text-decoration: none;
-  font-weight: 500; /* Matching your nav link style */
+  font-weight: 500;
   transition: opacity 0.2s;
 }
 
@@ -205,16 +229,7 @@ main {
 }
 
 .copyright {
-  color: rgba(255, 255, 255, 0.8); /* Lighter white for copyright */
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.9rem;
   margin-top: 1rem;
 }
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
