@@ -3,7 +3,7 @@
     <script-file value="$PROJECT_DIR$/src/main/resources/dbSchemaSetup.sql" />
     <script-file value="$PROJECT_DIR$/src/main/resources/dbDummySetup.sql" />
     <script-mode>FILE</script-mode>
-    <data-source id="04089193-c881-4037-97ce-a03f886610fa" namespace="schema/&quot;WishDatabase&quot;" />
+    <data-source id="c2e80d68-ec79-4cc3-b66b-ee6589902890" namespace="schema/&quot;WishDatabase&quot;" />
     <method v="2" />
   </configuration>
 </component>

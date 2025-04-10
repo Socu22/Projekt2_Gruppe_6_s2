@@ -49,7 +49,7 @@
 <div class="container">
 
   <div class="square" th:each="wishList : ${wishLists}">
-    <form th:action="@{WishList}" th:method="get">+
+    <form th:action="@{WishList}" th:method="get">
 
     <a th:href="@{WishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
 
