@@ -17,20 +17,11 @@ public class PageController {
     @Autowired
     UserRepositoryDatabase repoUser;
 
-/*
-    // Login form
-    @GetMapping("/login")
-    public String login(){
-        return "login";
+    @GetMapping("/")// This is the homepage
+    public String getIndex(Model model){
+
+        // model.addAttribute();
+        return "index";
     }
 
-
-    // Login form with error
-    @GetMapping("/error")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "login";
-    }
-
- */
 }
