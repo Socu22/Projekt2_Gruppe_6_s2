@@ -63,13 +63,20 @@ public class WishController {
         return "createWishInWishList";
     }
     @GetMapping("/saveWishInWishList")
-    public String postWishInWishList(@RequestParam("listId") int listId,@RequestParam("price")double price, @RequestParam("title") String title,@RequestParam("description") String description, @RequestParam("link") String link, @RequestParam("img") String img) throws SQLException {
+    public String postWishInWishList(HttpServletRequest request, @RequestParam("listId") int listId,@RequestParam("price")double price, @RequestParam("title") String title,@RequestParam("description") String description, @RequestParam("link") String link, @RequestParam("img") String img) throws SQLException {
+        HttpSession session = request.getSession(false);
+        User user = null;
+        if(session!=null){
+            user = (User)session.getAttribute("activeUser");
+        }
+
         ArrayList<Wish> wishList = new ArrayList<>();
         wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
         WishList wishListInstance = new WishList(title,listId,wishList);
-        repo.saveWishlist(1,listId,wishListInstance);
+        repo.saveWishlist(user.getId(), listId,wishListInstance);
 
-        return "profile";
+
+        return "redirect:/Profile";
     }
 
 
