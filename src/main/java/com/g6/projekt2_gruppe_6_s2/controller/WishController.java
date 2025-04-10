@@ -55,7 +55,7 @@ public class WishController {
 
 
     @GetMapping("/getCreateWishList")
-    public String GetCreateWishList() {
+    public String getCreateWishList() {
         return "createWishList";
     }
 
@@ -63,16 +63,26 @@ public class WishController {
     @GetMapping("/saveCreateWishList")
     public String postCreateWishlist(@RequestParam("title") String title ) throws SQLException {
 
-        int listId = repo.createWishlist(1);
+        int listId = repo.createWishlist(1); //makes all necessary logic for creating something in this database. works with my lucas.sql
+
+//        ArrayList<Wish> wishList = new ArrayList<>();
+//        wishList.add(new Wish(repo.getNextWishId(),"t2"));
+//        WishList wishListInstance = new WishList(title,listId,wishList);
+//        repo.saveWishlist(1,listId,wishListInstance); //saves a dummy
+        return "profile";
+    }
+
+    @GetMapping("/getWishInWishList")
+    public String getWishInWishList(){
+        return "createWishInWishList";
+    }
+    @GetMapping("/saveWishInWishList")
+    public String postWishInWishList(@RequestParam("listId") int listId,@RequestParam("price")double price, @RequestParam("title") String title,@RequestParam("description") String description, @RequestParam("link") String link, @RequestParam("img") String img) throws SQLException {
         ArrayList<Wish> wishList = new ArrayList<>();
-        wishList.add(new Wish(repo.getNextWishId(),"t2"));
-
-
-
-
+        wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
         WishList wishListInstance = new WishList(title,listId,wishList);
-
         repo.saveWishlist(1,listId,wishListInstance);
+
         return "profile";
     }
 

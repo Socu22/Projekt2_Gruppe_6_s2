@@ -164,9 +164,9 @@ public class WishRepositoryDataBase {
 
 
     // Save changes to the database - kind of depending on listId from createwislist method
-    public void saveWishlist(int userId, int _listId, WishList usersWishList) throws SQLException {
+    public void saveWishlist(int userId, int _listId, WishList objectWishList) throws SQLException {
         String selectListHolderSQL = "SELECT listId FROM listHolders WHERE userId = ? AND listId = ?";
-        String insertWishesSQL = "INSERT INTO wishes (title) VALUES (?)";
+        String insertWishesSQL = "INSERT INTO wishes (price, title, description, link, img) VALUES (?,?,?,?,?)";
         String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
 
         try (Connection conn = dataSource.getConnection();
@@ -174,7 +174,8 @@ public class WishRepositoryDataBase {
              PreparedStatement wishesStmt = conn.prepareStatement(insertWishesSQL);
              PreparedStatement wishListStmt = conn.prepareStatement(insertWishListSQL)) {
 
-            List<Integer> wishIds = usersWishList.getWishesIds();
+            List<Integer> wishIds = objectWishList.getWishesIds();
+            List<Wish> tempWishList = objectWishList.getList();
 
             listHolderStmt.setInt(1, userId);
             listHolderStmt.setInt(2, _listId);
@@ -183,8 +184,13 @@ public class WishRepositoryDataBase {
                 if (resultSet.next()) {
                     int listId = resultSet.getInt("listId");
 
-                    for (int wishId : wishIds) {
-                        wishesStmt.setString(1, "wishestest2");
+                    for (int i = 0; i < wishIds.size(); i++) {
+                        Wish currentWish = tempWishList.get(i);
+                        wishesStmt.setDouble(1, currentWish.getPrice());
+                        wishesStmt.setString(2, currentWish.getTitle());
+                        wishesStmt.setString(3, currentWish.getDescription());
+                        wishesStmt.setString(4, currentWish.getLink());
+                        wishesStmt.setString(5, currentWish.getImage());
                         wishesStmt.addBatch();
                     }
                     wishesStmt.executeBatch();

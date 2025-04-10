@@ -23,6 +23,7 @@ public class Wish{
         this.link = link;
         this.id = id;
     }
+
     public Wish(String title) {
         this.title = title;
     }
