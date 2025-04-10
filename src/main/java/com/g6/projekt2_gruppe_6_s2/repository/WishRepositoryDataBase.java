@@ -62,6 +62,7 @@ public class WishRepositoryDataBase {
             while (resultSet.next()) {
                 WishList wishList = new WishList();
                 wishList.setListId(resultSet.getInt("listId"));
+                wishList.setTitle(resultSet.getString("title"));
                 wishLists.add(wishList);
             }
         } catch (SQLException e) {
