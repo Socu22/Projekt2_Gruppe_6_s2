@@ -45,6 +45,7 @@ public class WishController {
             user = (User)session.getAttribute("activeUser");
         }
         boolean isUser = false;
+
         if (user!=null && repo.userOwnsList(user.getId(), id)){
             isUser = true;
 
@@ -61,8 +62,7 @@ public class WishController {
 
     @GetMapping("/getWishInWishList")
     public String getWishInWishList(@RequestParam("id") int id, Model model){
-
-        model.addAttribute("listId",id);
+        model.addAttribute("listId",id);//the id works until used here idk why. returns a 0 insead of a number
 
 
         return "createWishInWishList";
@@ -81,7 +81,10 @@ public class WishController {
             user = (User)session.getAttribute("activeUser");
         }
 
-            ArrayList<Wish> wishList = new ArrayList<>();
+        System.out.println("in postWishInWishList"+listId);
+
+
+        ArrayList<Wish> wishList = new ArrayList<>();
             wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
             WishList wishListInstance = new WishList(title,listId,wishList);
             repo.saveWishlist(user.getId(), listId,wishListInstance);
