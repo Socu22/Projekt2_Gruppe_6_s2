@@ -8,6 +8,7 @@ import com.g6.projekt2_gruppe_6_s2.repository.WishRepositoryDataBase;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,21 +60,31 @@ public class WishController {
     }
 
     @GetMapping("/getWishInWishList")
-    public String getWishInWishList(){
+    public String getWishInWishList(@RequestParam("id") int id, Model model){
+
+        model.addAttribute("listId",id);
+
+
         return "createWishInWishList";
     }
     @GetMapping("/saveWishInWishList")
-    public String postWishInWishList(HttpServletRequest request, @RequestParam("listId") int listId,@RequestParam("price")double price, @RequestParam("title") String title,@RequestParam("description") String description, @RequestParam("link") String link, @RequestParam("img") String img) throws SQLException {
+    public String postWishInWishList(HttpServletRequest request,
+                                     @RequestParam("listId") int listId,
+                                     @RequestParam("price")double price,
+                                     @RequestParam("title") String title,
+                                     @RequestParam("description") String description,
+                                     @RequestParam("link") String link,
+                                     @RequestParam("img") String img) throws SQLException {
         HttpSession session = request.getSession(false);
         User user = null;
         if(session!=null){
             user = (User)session.getAttribute("activeUser");
         }
 
-        ArrayList<Wish> wishList = new ArrayList<>();
-        wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
-        WishList wishListInstance = new WishList(title,listId,wishList);
-        repo.saveWishlist(user.getId(), listId,wishListInstance);
+            ArrayList<Wish> wishList = new ArrayList<>();
+            wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
+            WishList wishListInstance = new WishList(title,listId,wishList);
+            repo.saveWishlist(user.getId(), listId,wishListInstance);
 
 
         return "redirect:/Profile";
