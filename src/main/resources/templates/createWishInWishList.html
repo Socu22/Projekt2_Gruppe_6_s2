@@ -49,7 +49,7 @@
 <body>
 <div class="container">
     <h2>Add Wish to Wishlist</h2>
-    <form th:action="@{/saveWishInWishList}" th:method="get">
+    <form th:action="@{/getWishInWishList}" th:method="get">
         <div class="form-group">
             <label for="listId">Wishlist ID:</label>
             <input type="number" id="listId" name="listId" required>
@@ -68,11 +68,11 @@
         </div>
         <div class="form-group">
             <label for="link">Link:</label>
-            <input type="url" id="link" name="link" required>
+            <input type="url" id="link" name="link">
         </div>
         <div class="form-group">
             <label for="img">Image URL:</label>
-            <input type="url" id="img" name="img" required>
+            <input type="url" id="img" name="img" >
         </div>
         <div class="form-group">
             <button type="submit">Add Wish</button>

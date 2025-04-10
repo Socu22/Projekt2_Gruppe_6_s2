@@ -67,6 +67,6 @@ public class WishListController {
 //        wishList.add(new Wish(repo.getNextWishId(),"t2"));
 //        WishList wishListInstance = new WishList(title,listId,wishList);
 //        repo.saveWishlist(1,listId,wishListInstance); //saves a dummy
-        return "profile";
+        return "redirect:/Profile";
     }
 }
