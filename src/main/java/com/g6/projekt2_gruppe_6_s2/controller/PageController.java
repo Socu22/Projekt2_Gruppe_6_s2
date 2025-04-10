@@ -18,9 +18,7 @@ public class PageController {
     UserRepositoryDatabase repoUser;
 
     @GetMapping("/")// This is the homepage
-    public String getIndex(Model model){
-
-        // model.addAttribute();
+    public String getIndex(){
         return "index";
     }
 

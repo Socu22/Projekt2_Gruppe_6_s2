@@ -27,52 +27,35 @@ public class WishController {
     WishRepositoryDataBase repo;
     WishRepository repo2;
 
-    @GetMapping("/Profile")// change this to connect to a users list somehow
-    public String getIndex(HttpServletRequest request, Model model){
+
+
+    @GetMapping("/Wish")// change this to connect to a users list somehow
+    public String Wish(@RequestParam("id") int id, Model model){
+        Wish wish;
+        wish = repo.getWish(id);
+        model.addAttribute("wish",wish);
+        return "showWish";
+    }
+    @GetMapping("/WishList")// shows wishes in a WishList
+    public String WishList(@RequestParam("id") int id, HttpServletRequest request, Model model){
         HttpSession session = request.getSession(false);
         User user = null;
         if(session!=null){
-           user = (User)session.getAttribute("activeUser");
+            user = (User)session.getAttribute("activeUser");
         }
+        boolean isUser = false;
+        if (user!=null && repo.userOwnsList(user.getId(), id)){
+            isUser = true;
 
-
-
-        var wishLists = new ArrayList<WishList>();
-        if(user!=null){
-            wishLists.addAll(repo.getWishLists(user.getId()));
-            for (int i = 0; i < wishLists.size(); i++) {
-                wishLists.get(i).setWishes(repo.getWishList(wishLists.get(i).getListId()));
-
-                ArrayList<Wish> list = wishLists.get(i).getWishes();
-                while (list.size() > 3) {
-                    list.remove(list.size() - 1);
-                }
-                wishLists.get(i).setWishes(list);
-            }
-            model.addAttribute("wishLists",wishLists);
         }
+        System.out.println(isUser);
+        model.addAttribute("isUser",isUser );
 
+        var wishList = new WishList();
+        wishList.setWishes(repo.getWishList(id ));
 
-        return "profile";
-    }
-
-
-    @GetMapping("/getCreateWishList")
-    public String getCreateWishList() {
-        return "createWishList";
-    }
-
-
-    @GetMapping("/saveCreateWishList")
-    public String postCreateWishlist(@RequestParam("title") String title ) throws SQLException {
-
-        int listId = repo.createWishlist(1); //makes all necessary logic for creating something in this database. works with my lucas.sql
-
-//        ArrayList<Wish> wishList = new ArrayList<>();
-//        wishList.add(new Wish(repo.getNextWishId(),"t2"));
-//        WishList wishListInstance = new WishList(title,listId,wishList);
-//        repo.saveWishlist(1,listId,wishListInstance); //saves a dummy
-        return "profile";
+        model.addAttribute("wishList",wishList);
+        return "wishList";
     }
 
     @GetMapping("/getWishInWishList")
