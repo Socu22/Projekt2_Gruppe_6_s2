@@ -55,6 +55,8 @@ public class WishController {
 
         var wishList = new WishList();
         wishList.setWishes(repo.getWishList(id ));
+        System.out.println("in postWishInWishList"+id);
+
 
         model.addAttribute("wishList",wishList);
         return "wishList";
@@ -63,7 +65,7 @@ public class WishController {
     @GetMapping("/getWishInWishList")
     public String getWishInWishList(@RequestParam("id") int id, Model model){
         model.addAttribute("listId",id);//the id works until used here idk why. returns a 0 insead of a number
-
+        System.out.println("in getWishInWishList"+id);
 
         return "createWishInWishList";
     }
