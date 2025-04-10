@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{style.css}">
     <title>Login page</title>
 </head>
 <body>
-<h1>Login page</h1>
-<form th:action="@{/VerifyLogin}" method="post">
-    <label for="username">Username</label>:
-    <input type="text" id="username" name="username" autofocus="autofocus"  required/> <br />
-    <label for="password">Password</label>:
-    <input type="password" id="password" name="password" required /> <br />
-    <input type="submit" value="Log in" />
-</form>
+<div class="container">
+    <header class="app-header">
+        <h1 class="app-title">MyWish</h1>
+        <img class="Logo" src="img/MyWish-Logo.png"/>
+        <nav class="main-nav">
+            <a href=""          class="nav-link">Home</a>
+            <a href=""          class="nav-link active">Login</a>
+            <a href="AboutUs"   class="nav-link">About Us</a>
+        </nav>
+    </header>
 
-<p th:text="${loginMsg}"></p>
+    <main>
+        <div class="wishlist-content">
+        <section>
+            <h2 class="section-title">Please enter your username and password</h2>
+            <form th:action="@{/VerifyLogin}" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="username" autofocus="autofocus" required/> <br/>
+                <label for="password">Password:&nbsp;</label>
+                <input type="password" id="password" name="password" placeholder="password" required /> <br/>
+                <input type="submit" value="Log in" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${loginMsg}"></span>
+            </form>
+        </section>
+        <br>
+        <section>
+            <h2 class="section-title">Or register</h2>
+            <form th:action="@{/Register}" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="newUsername" name="username" placeholder="username" required/> <br/>
+                <label for="password">Password:&nbsp;</label>
+                <input type="password" id="newPassword" name="password" placeholder="password" required /> <br/>
+                <label for="password">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input type="password" id="newPassword2" name="password2" placeholder="repeat password" required /> <br/>
+                <input type="submit" value="Register" />&nbsp;&nbsp;&nbsp;<span th:text="${registerMsg}"></span>
+            </form>
+        </section>
+        </div>
+    </main>
+</div>
 </body>
 </html>
+
