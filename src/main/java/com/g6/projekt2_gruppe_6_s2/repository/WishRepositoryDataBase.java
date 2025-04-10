@@ -87,6 +87,22 @@ public class WishRepositoryDataBase {
         }
         return wish;
     }
+    public boolean userOwnsList(int userId, int listId) {
+        String sql = "SELECT * FROM listHolders WHERE listId = " + listId + ";";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                if (resultSet.getInt("userId") == userId) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     // Create a new wishlist and associate wishes with it
     public int createWishlist(int userId) throws SQLException

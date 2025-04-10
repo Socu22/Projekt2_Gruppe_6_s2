@@ -68,7 +68,8 @@
     </form>
   </div>
 
-<div class="square" >
+
+<div class="square" th:if="${isUser }" >
   <a th:href="@{getCreateWishList(id=${wishList.getListId()})}" style="text-decoration: none; color: inherit;" >
     <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
       <img  src="https://www.pngall.com/wp-content/uploads/10/Plus-Symbol-Vector-PNG-HD-Image.png" alt="picture not found"  />

@@ -30,12 +30,15 @@ public class WishController {
     @GetMapping("/Profile")// change this to connect to a users list somehow
     public String getIndex(HttpServletRequest request, Model model){
         HttpSession session = request.getSession(false);
-        User user = (User)session.getAttribute("activeUser");
+        User user = null;
+        if(session!=null){
+           user = (User)session.getAttribute("activeUser");
+        }
+
 
 
         var wishLists = new ArrayList<WishList>();
         if(user!=null){
-            System.out.println("user exists");
             wishLists.addAll(repo.getWishLists(user.getId()));
             for (int i = 0; i < wishLists.size(); i++) {
                 wishLists.get(i).setWishes(repo.getWishList(wishLists.get(i).getListId()));
