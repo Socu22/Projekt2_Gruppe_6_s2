@@ -59,9 +59,15 @@ public class WishListController {
 
 
     @GetMapping("/saveCreateWishList")
-    public String postCreateWishlist(@RequestParam("title") String title ) throws SQLException {
+    public String postCreateWishlist(HttpServletRequest request, @RequestParam("title") String title ) throws SQLException {
 
-        int listId = repo.createWishlist(1); //makes all necessary logic for creating something in this database. works with my lucas.sql
+        HttpSession session = request.getSession(false);
+        User user = null;
+        if(session!=null){
+            user = (User)session.getAttribute("activeUser");
+        }
+
+        int listId = repo.createWishlist(user.getId()); //makes all necessary logic for creating something in this database. works with my lucas.sql
 
 //        ArrayList<Wish> wishList = new ArrayList<>();
 //        wishList.add(new Wish(repo.getNextWishId(),"t2"));
