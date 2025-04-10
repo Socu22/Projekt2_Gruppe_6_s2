@@ -132,20 +132,30 @@ public class WishRepositoryDataBase {
             {
                 if (generatedKeys.next())
                 {
-                    listId = generatedKeys.getInt(1);
+                    listId = generatedKeys.getInt(1); // listId that gets returned
 
-                    // Insert wishes into wishLists
+                    /*// Insert wish into wishes
+                    for (int wishId : wishIds)
+                    {
+
+
+                        wishesStmt.setString(1, "wishestest");
+                        wishesStmt.addBatch();
+                    }
+                    wishesStmt.executeBatch();
+
+                    // Insert wish into wishes
                     for (int wishId : wishIds)
                     {
                         wishListStmt.setInt(1, listId);
                         wishListStmt.setInt(2, wishId);
                         wishListStmt.addBatch();
 
-                        wishesStmt.setString(1, "wishestest");
-                        wishesStmt.addBatch();
                     }
-                    wishesStmt.executeBatch();
-                    //wishListStmt.executeBatch();
+
+                    wishListStmt.executeBatch();
+
+                     */
                 }
             }
         }
@@ -169,44 +179,51 @@ public class WishRepositoryDataBase {
     }
 
 
-    // Save changes to the database
-    public void saveWishlist(int userId, WishList usersWishList) throws SQLException {
-        String selectListHolderSQL = "SELECT listId FROM listHolders WHERE userId = ?";
-
-        // dummies
-        String insertWishesSQL     = "INSERT INTO wishes (title) VALUES (?)";
-        String insertWishListSQL   = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
+    // Save changes to the database - kind of depending on listId from createwislist method
+    public void saveWishlist(int userId, int _listId, WishList objectWishList) throws SQLException {
+        String selectListHolderSQL = "SELECT listId FROM listHolders WHERE userId = ? AND listId = ?";
+        String insertWishesSQL = "INSERT INTO wishes (price, title, description, link, img) VALUES (?,?,?,?,?)";
+        String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
 
         try (Connection conn = dataSource.getConnection();
              PreparedStatement listHolderStmt = conn.prepareStatement(selectListHolderSQL);
-
-             // dummies
              PreparedStatement wishesStmt = conn.prepareStatement(insertWishesSQL);
              PreparedStatement wishListStmt = conn.prepareStatement(insertWishListSQL)) {
 
+            List<Integer> wishIds = objectWishList.getWishesIds();
+            List<Wish> tempWishList = objectWishList.getList();
+
             listHolderStmt.setInt(1, userId);
+            listHolderStmt.setInt(2, _listId);
+
             try (ResultSet resultSet = listHolderStmt.executeQuery()) {
                 if (resultSet.next()) {
                     int listId = resultSet.getInt("listId");
 
-                    // Assuming wishIds is a field in usersWishList
-                    for (int wishId : usersWishList.getWishesIds()) {
-                        wishListStmt.setInt(1, listId);
-                        wishListStmt.setInt(2, wishId);
-                        wishListStmt.addBatch();
-
-                        wishesStmt.setInt(1, wishId);
-                        wishesStmt.setString(1, "wishestest");
+                    for (int i = 0; i < wishIds.size(); i++) {
+                        Wish currentWish = tempWishList.get(i);
+                        wishesStmt.setDouble(1, currentWish.getPrice());
+                        wishesStmt.setString(2, currentWish.getTitle());
+                        wishesStmt.setString(3, currentWish.getDescription());
+                        wishesStmt.setString(4, currentWish.getLink());
+                        wishesStmt.setString(5, currentWish.getImage());
                         wishesStmt.addBatch();
                     }
                     wishesStmt.executeBatch();
-                    //wishListStmt.executeBatch();
+
+                    for (int wishId : wishIds) {
+                        wishListStmt.setInt(1, listId);
+                        wishListStmt.setInt(2, wishId);
+                        wishListStmt.addBatch();
+                    }
+                    wishListStmt.executeBatch();
                 } else {
                     throw new SQLException("No listId found for userId: " + userId);
                 }
             }
         }
     }
+
     // Add wishes to an existing wishlist ------- outdated
     public void addWishesToWishlist(int listId, List<Integer> wishIds) throws SQLException {
         String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
