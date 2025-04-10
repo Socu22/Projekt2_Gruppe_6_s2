@@ -25,7 +25,7 @@ CREATE TABLE users (
 CREATE TABLE listHolders (
                              listId INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                              userId INT NOT NULL,
-                             FOREIGN KEY (userId) REFERENCES users(userId)
+                             FOREIGN KEY (userId) REFERENCES users(userId), title varchar(50)
 );
 
 -- Create the wishLists table

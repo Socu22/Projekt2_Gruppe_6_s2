@@ -67,7 +67,7 @@ public class WishListController {
             user = (User)session.getAttribute("activeUser");
         }
 
-        int listId = repo.createWishlist(user.getId()); //makes all necessary logic for creating something in this database. works with my lucas.sql
+        int listId = repo.createWishlist(user.getId(),title); //makes all necessary logic for creating something in this database. works with my lucas.sql
 
 //        ArrayList<Wish> wishList = new ArrayList<>();
 //        wishList.add(new Wish(repo.getNextWishId(),"t2"));

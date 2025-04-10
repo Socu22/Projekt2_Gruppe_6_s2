@@ -105,9 +105,9 @@ public class WishRepositoryDataBase {
     }
 
     // Create a new wishlist and associate wishes with it
-    public int createWishlist(int userId) throws SQLException
+    public int createWishlist(int userId, String title) throws SQLException
     {
-        String insertListHolderSQL = "INSERT INTO listHolders (userId) VALUES (?)";
+        String insertListHolderSQL = "INSERT INTO listHolders (userId, title) VALUES (?,?)";
 
         String insertWishesSQL   = "INSERT INTO wishes (title) VALUES (?)";
         String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
@@ -125,6 +125,7 @@ public class WishRepositoryDataBase {
 
             // Insert into listHolders
             listHolderStmt.setInt(1, userId);
+            listHolderStmt.setString(2, title);
             listHolderStmt.executeUpdate();
 
             // Get the generated listId
