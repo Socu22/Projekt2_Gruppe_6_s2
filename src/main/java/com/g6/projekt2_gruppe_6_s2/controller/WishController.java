@@ -69,7 +69,7 @@ public class WishController {
     }
     @GetMapping("/saveWishInWishList")
     public String postWishInWishList(HttpServletRequest request,
-                                     @RequestParam("listId") int listId,
+                                     @RequestParam("listId=id") int listId,
                                      @RequestParam("price")double price,
                                      @RequestParam("title") String title,
                                      @RequestParam("description") String description,

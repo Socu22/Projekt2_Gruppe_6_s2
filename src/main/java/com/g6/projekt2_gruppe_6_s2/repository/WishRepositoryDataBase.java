@@ -183,7 +183,7 @@ public class WishRepositoryDataBase {
 
     // Save changes to the database - kind of depending on listId from createwislist method
     public void saveWishlist(int userId, int _listId, WishList objectWishList) throws SQLException {
-        String selectListHolderSQL = "SELECT listId FROM listHolders WHERE userId = " + userId + " AND listId = ?";
+        String selectListHolderSQL = "SELECT listId FROM listHolders WHERE userId = ? AND listId = ?";
         String insertWishesSQL = "INSERT INTO wishes (price, title, description, link, img) VALUES (?,?,?,?,?)";
         String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
 
@@ -196,7 +196,8 @@ public class WishRepositoryDataBase {
             List<Wish> tempWishList = objectWishList.getList();
 
 
-            listHolderStmt.setInt(1, _listId);
+            listHolderStmt.setInt(1, userId);
+            listHolderStmt.setInt(2, _listId);
 
             try (ResultSet resultSet = listHolderStmt.executeQuery()) {
                 if (resultSet.next()) {
