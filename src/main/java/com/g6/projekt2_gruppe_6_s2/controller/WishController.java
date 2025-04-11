@@ -37,6 +37,7 @@ public class WishController {
         User user = null;
         if(session!=null){
             user = (User)session.getAttribute("activeUser");
+            session.setAttribute("id2", wishId);
         }
         model.addAttribute("isLoggedIn",user != null);
         boolean isUser = false;
@@ -56,12 +57,16 @@ public class WishController {
     public String removeWish(HttpServletRequest request, Model model) throws SQLException {
         HttpSession session = request.getSession(false);
         User user = null;
+        int lastActiveListId = 0;
         if(session!=null){
-            user = (User)session.getAttribute("activeUser");    }
+            user = (User)session.getAttribute("activeUser");
+            int _id2 = (int) session.getAttribute("id2");
+            lastActiveListId = (int) session.getAttribute("lastActiveWishList");
+            repo.removeWishFromWishlist(_id2);
+        }
         assert session != null;
-        int _id2 = (int) session.getAttribute("id2");
-        int lastActiveListId = (int) session.getAttribute("lastActiveWishList");
-        repo.removeWishFromWishlist(_id2);
+
+
         return "redirect:WishList?id="+lastActiveListId;
     }
     @GetMapping("/WishList")// shows wishes in a WishList
@@ -144,8 +149,10 @@ public class WishController {
             @RequestParam("img") String img) throws SQLException {
         HttpSession session = request.getSession(false);
         User user = null;
+        int lastActiveListId = 0;
         if(session!=null){
             user = (User)session.getAttribute("activeUser");
+             lastActiveListId = (int) session.getAttribute("lastActiveWishList");
         }
         boolean isUser = false;
 
@@ -163,7 +170,7 @@ public class WishController {
             WishList wishListInstance = new WishList(title,listId,wishList);
             repo.saveWishlist(user.getId(), listId,wishListInstance);
         }
-        return "redirect:/Profile";
+        return "redirect:WishList?id="+lastActiveListId;
     }
 
 

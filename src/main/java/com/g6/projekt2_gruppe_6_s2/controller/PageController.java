@@ -21,5 +21,9 @@ public class PageController {
     public String getIndex(){
         return "index";
     }
+    @GetMapping("/Home")// This is the homepage
+    public String Home(){
+        return "index";
+    }
 
 }
