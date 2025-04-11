@@ -50,7 +50,7 @@
 <body>
 <header class="app-header">
   <div class="header-brand">
-    <img class="logo" th:src="@{/img/MyWish-Logo.png}" alt="MyWish Logo"/>
+    <img class="logo" th:src="@{/img/mywish-logo.png}" alt="MyWish Logo"/>
   </div>
   <nav class="main-nav">
     <a href="Home" class="nav-link">Home</a>
@@ -69,9 +69,9 @@
     <a th:href="@{WishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
 
     <div style="padding: 4%">
-        <img  th:src="@{/img/MyWish-cloud.png}" alt="picture not found" />
+      <img  th:src="@{/img/mywish-cloud.png}" alt="picture not found" /><br>
 
-      <label>ønskeliste: </label>
+      <label>WishList: </label>
       <span th:text="${wishList.getTitle()}"></span>
       <div th:each="wish : ${wishList.getWishes()}">
         <span> -</span>
@@ -85,7 +85,7 @@
   <div class="square" >
     <a href="getCreateWishList" style="text-decoration: none; color: inherit;" >
       <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
-        <img  th:src="@{/img/MyWish-add.png}" alt="picture not found"  style="height: 50%; width: 50%;"/>
+        <img  th:src="@{/img/mywish-add.png}" alt="picture not found"  style="height: 50%; width: 50%;"/>
 
       </div>
     </a>
