@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <style>
   .square {
@@ -46,6 +47,17 @@
   }
 </style>
 <body>
+<header class="app-header">
+  <h1 class="app-title">MyWish</h1>
+  <img class="Logo" src="img/MyWish-Logo.png"/>
+  <nav class="main-nav">
+    <a href=""          class="nav-link active">Home</a>
+
+    <a href="Login"     class="nav-link" th:unless="${isLoggedIn }">Login</a>
+    <a href="Profile"     class="nav-link" th:if="${isLoggedIn}">My Profile</a>
+    <a href="AboutUs"   class="nav-link">About Us</a>
+  </nav>
+</header>
 <div class="container">
 
   <div class="square" th:each="wishList : ${wishLists}">
