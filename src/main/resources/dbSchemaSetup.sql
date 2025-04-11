@@ -42,8 +42,9 @@ CREATE TABLE listHolders
     # User owning the list
     userId INT NOT NULL, FOREIGN KEY (userId) references users(userId),
 
-    # Optional title allowing easier distinction for users with multiple lists
-    title  VARCHAR(100)
+    # Optional title and image allowing easier distinction for users with multiple lists
+    title  VARCHAR(100),
+    img    VARCHAR(255)
 );
 
 # Table associating wishes to wishlists
