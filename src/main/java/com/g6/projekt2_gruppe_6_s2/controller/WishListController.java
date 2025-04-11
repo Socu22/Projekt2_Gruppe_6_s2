@@ -28,7 +28,7 @@ public class WishListController {
         if(session!=null){
             user = (User)session.getAttribute("activeUser");
         }
-
+        model.addAttribute("isLoggedIn",user != null);
 
 
         var wishLists = new ArrayList<WishList>();

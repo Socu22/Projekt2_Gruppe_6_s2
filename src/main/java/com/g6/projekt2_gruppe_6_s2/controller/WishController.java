@@ -32,11 +32,37 @@ public class WishController {
 
 
     @GetMapping("/Wish")// change this to connect to a users list somehow
-    public String Wish(@RequestParam("id") int id, Model model){
+    public String Wish(HttpServletRequest request, @RequestParam("wishId") int wishId,@RequestParam("listId") int listId, Model model){
+        HttpSession session = request.getSession(false);
+        User user = null;
+        if(session!=null){
+            user = (User)session.getAttribute("activeUser");
+        }
+        model.addAttribute("isLoggedIn",user != null);
+        boolean isUser = false;
+
+        if (user!=null && repo.userOwnsList(user.getId(), listId)){
+            isUser = true;
+        }
+        model.addAttribute("isUser",isUser );
+        model.addAttribute("listId",listId);
+
         Wish wish;
-        wish = repo.getWish(id);
+        wish = repo.getWish(wishId);
         model.addAttribute("wish",wish);
         return "showWish";
+    }
+    @GetMapping("/removeWish")
+    public String removeWish(HttpServletRequest request, Model model) throws SQLException {
+        HttpSession session = request.getSession(false);
+        User user = null;
+        if(session!=null){
+        user = (User)session.getAttribute("activeUser");    }
+        assert session != null;
+        int _id2 = (int) session.getAttribute("id2");
+        int lastActiveListId = (int) session.getAttribute("lastActiveWishList");
+        repo.removeWishFromWishlist(_id2);
+        return "redirect:WishList?id="+lastActiveListId;
     }
     @GetMapping("/WishList")// shows wishes in a WishList
     public String WishList(@RequestParam("id") int id, HttpServletRequest request, Model model){
@@ -45,17 +71,19 @@ public class WishController {
         if(session!=null){
             user = (User)session.getAttribute("activeUser");
         }
+        model.addAttribute("isLoggedIn",user != null);
+
         boolean isUser = false;
 
         if (user!=null && repo.userOwnsList(user.getId(), id)){
             isUser = true;
-
         }
-        System.out.println(isUser);
         model.addAttribute("isUser",isUser );
+        session.setAttribute("lastActiveWishList",id);
 
         var wishList = new WishList();
         wishList.setWishes(repo.getWishList(id ));
+        wishList.setListId(id);
         System.out.println("in wishList"+id);
 
 
@@ -115,7 +143,39 @@ public class WishController {
 
         return "redirect:/Profile";
     }
+    @GetMapping("/editWishInWishList")
+    public String editWishInWishList(
+            HttpServletRequest request,Model model,
+            @RequestParam("wishId") int wishId,
+            @RequestParam("listId") int listId,
+            @RequestParam("price")double price,
+            @RequestParam("title") String title,
+            @RequestParam("description") String description,
+            @RequestParam("link") String link,
+            @RequestParam("img") String img) throws SQLException {
+        HttpSession session = request.getSession(false);
+        User user = null;
+        if(session!=null){
+            user = (User)session.getAttribute("activeUser");
+        }
+        boolean isUser = false;
 
+        if (user!=null && repo.userOwnsList(user.getId(), listId)){
+            isUser = true;
+        }
+
+
+
+
+        if(isUser){
+            repo.removeWishFromWishlist(wishId);
+            ArrayList<Wish> wishList = new ArrayList<>();
+            wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
+            WishList wishListInstance = new WishList(title,listId,wishList);
+            repo.saveWishlist(user.getId(), listId,wishListInstance);
+        }
+        return "redirect:/Profile";
+    }
 
 
 }

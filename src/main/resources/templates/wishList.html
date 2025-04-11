@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <style>
   .square {
@@ -46,12 +47,23 @@
   }
 </style>
 <body>
+<header class="app-header">
+  <h1 class="app-title">MyWish</h1>
+  <img class="Logo" src="img/MyWish-Logo.png"/>
+  <nav class="main-nav">
+    <a href=""          class="nav-link active">Home</a>
+
+    <a href="Login"     class="nav-link" th:unless="${isLoggedIn }">Login</a>
+    <a href="Profile"     class="nav-link" th:if="${isLoggedIn}">My Profile</a>
+    <a href="AboutUs"   class="nav-link">About Us</a>
+  </nav>
+</header>
 
 <div class="container">
 
   <div class="square" th:each="wish : ${wishList.getWishes()}">
     <form th:action="@{Wish}" th:method="get">
-    <a th:href="@{Wish(id=${wish.id})}" style="text-decoration: none; color: inherit;" >
+    <a th:href="@{Wish(wishId=${wish.id}, listId = ${wishList.listId})}" style="text-decoration: none; color: inherit;" >
       <div style="padding: 4%;">
         <img  src="https://images.squarespace-cdn.com/content/v1/65d4f4d5f3f72e6e3d20e52a/fac0c84a-24f1-4e70-99d3-afd24f94d556/cumulus-2.jpg?format=1500w" alt="picture not found" />
         <div style="width: 95%">
