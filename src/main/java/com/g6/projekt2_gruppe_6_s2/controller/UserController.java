@@ -81,6 +81,7 @@ public class UserController
 
             if (delete(username, password, model))
             {
+                System.out.println(LocalDateTime.now() + "\u001B[32m  DELT\u001B[35m user\u001B[0m ---- [" + username + "]");
                 return "login";
             }
 

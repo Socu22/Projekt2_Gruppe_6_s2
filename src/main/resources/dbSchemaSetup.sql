@@ -4,7 +4,7 @@ DROP DATABASE IF EXISTS WishDatabase;
 CREATE DATABASE WishDatabase;
 USE WishDatabase;
 
-# GDPR notes:
+#   GDPR notes:
 # While person-identifying data is never asked from users by our app, the
 # tables 'users' and 'listHolders' can be used to identify a user within
 # our system.
@@ -39,8 +39,8 @@ CREATE TABLE listHolders
     # Internal list identifier
     listId INT NOT NULL  AUTO_INCREMENT PRIMARY KEY,
 
-    # User owning the list
-    userId INT NOT NULL, FOREIGN KEY (userId) references users(userId),
+    # User owning the list (if the user is deleted this entry is also deleted)
+    userId INT NOT NULL, FOREIGN KEY (userId) references users(userId) ON DELETE CASCADE,
 
     # Optional title and image allowing easier distinction for users with multiple lists
     title  VARCHAR(100),
@@ -50,12 +50,12 @@ CREATE TABLE listHolders
 # Table associating wishes to wishlists
 CREATE TABLE wishLists
 (
-    # List holding this entry
-    listId INT NOT NULL, FOREIGN KEY (listId) references listHolders(listId),
+    # List holding this entry (if the list is deleted this entry is also deleted)
+    listId INT NOT NULL, FOREIGN KEY (listId) references listHolders(listId) ON DELETE CASCADE,
 
-    # Wish attributed to this entry, and thereby List
+    # Wish attributed to this entry, and thereby List (if the user is deleted this entry is also deleted)
     wishId INT NOT NULL, FOREIGN KEY (wishId) references wishes(wishId),
 
     # Potential user reserving wish for gifting (should not allow user owning list?)
-    userId INT,          FOREIGN KEY (userId) references users(userId)
+    reserverId INT,      FOREIGN KEY (reserverId) references users(userId) ON DELETE SET NULL
 );

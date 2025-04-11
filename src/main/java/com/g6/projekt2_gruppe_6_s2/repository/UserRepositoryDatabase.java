@@ -142,16 +142,14 @@ public class UserRepositoryDatabase
     public void deleteUser(User user, String password)
             throws SQLException
     {
-        String sql = "DELETE FROM listHolders WHERE userId = ?;" +
-                     "DELETE FROM users WHERE userId = ? AND username = ? AND password = ?";
+        String sql = "DELETE FROM users WHERE userId = ? AND username = ? AND password = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql))
         {
-            statement.setString(1, ""+user.getId());
-            statement.setString(2, ""+user.getId());
-            statement.setString(3, user.getUsername());
-            statement.setString(4, password);
+            statement.setString(1, "" + user.getId());
+            statement.setString(2, user.getUsername());
+            statement.setString(3, password);
             statement.execute();
         }
         catch (SQLException e)
