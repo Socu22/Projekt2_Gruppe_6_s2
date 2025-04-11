@@ -26,6 +26,13 @@ public class UserController
         return "login";
     }
 
+    @GetMapping("/Logout")
+    public String logout(HttpServletRequest request)
+    {
+        request.getSession(false).invalidate();
+        return "login";
+    }
+
     @PostMapping("/VerifyLogin")
     public String verify(@RequestParam("username")  String username,
                          @RequestParam("password")  String password,
