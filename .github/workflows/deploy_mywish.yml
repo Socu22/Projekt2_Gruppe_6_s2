@@ -1,12 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - wishwebapp
+name: Build and deploy JAR app to Azure Web App - MyWish
 
 on:
   push:
     branches:
-      - master
+      - deploy
   workflow_dispatch:
 
 jobs:
@@ -52,15 +52,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_190F55B2B86C4A4F84EDB954D7BB62D9 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_09C302288D964FA1BD82250FDD311BB3 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1CF706A22F8D46B2A13B96D84DD51B56 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_957324878E394419BF2A477C13C77092 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A72C67AE1540498191B96750AFC7A8C6 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0367B2DD0E714F8C85FFADF9674A6538 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'wishwebapp'
+          app-name: 'MyWish'
           slot-name: 'Production'
           package: '*.jar'
           
