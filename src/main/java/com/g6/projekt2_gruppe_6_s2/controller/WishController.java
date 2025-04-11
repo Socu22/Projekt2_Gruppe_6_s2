@@ -24,7 +24,7 @@ import java.util.Locale;
 
 @Controller
 public class WishController {
-    
+
     @Autowired
     WishRepositoryDataBase repo;
     WishRepository repo2;
@@ -57,7 +57,7 @@ public class WishController {
         HttpSession session = request.getSession(false);
         User user = null;
         if(session!=null){
-        user = (User)session.getAttribute("activeUser");    }
+            user = (User)session.getAttribute("activeUser");    }
         assert session != null;
         int _id2 = (int) session.getAttribute("id2");
         int lastActiveListId = (int) session.getAttribute("lastActiveWishList");
@@ -115,12 +115,12 @@ public class WishController {
     }
     @GetMapping("/saveWishInWishList")
     public String postWishInWishList(
-                            HttpServletRequest request,Model model,
-                                     @RequestParam("price")double price,
-                                     @RequestParam("title") String title,
-                                     @RequestParam("description") String description,
-                                     @RequestParam("link") String link,
-                                     @RequestParam("img") String img) throws SQLException {
+            HttpServletRequest request,Model model,
+            @RequestParam("price")double price,
+            @RequestParam("title") String title,
+            @RequestParam("description") String description,
+            @RequestParam("link") String link,
+            @RequestParam("img") String img) throws SQLException {
         HttpSession session = request.getSession(false);
         User user = null;
         if(session!=null){
@@ -136,9 +136,9 @@ public class WishController {
 
 
         ArrayList<Wish> wishList = new ArrayList<>();
-            wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
-            WishList wishListInstance = new WishList(title,_id,wishList);
-            repo.saveWishlist(user.getId(), _id,wishListInstance);
+        wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
+        WishList wishListInstance = new WishList(title,_id,wishList);
+        repo.saveWishlist(user.getId(), _id,wishListInstance);
 
 
         return "redirect:/Profile";
