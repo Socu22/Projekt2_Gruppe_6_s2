@@ -122,6 +122,7 @@ public class WishController {
 
         assert session != null;
         int _id = (int) session.getAttribute("id");
+        String lastActiveListId = (String) session.getAttribute("lastActiveWishList");
 
         model.addAttribute("id",_id);
 
@@ -134,7 +135,8 @@ public class WishController {
         repo.saveWishlist(user.getId(), _id,wishListInstance);
 
 
-        return "redirect:/Profile";
+
+        return "redirect:/redirect:WishList?id="+lastActiveListId;
     }
     @GetMapping("/editWishInWishList")
     public String editWishInWishList(
