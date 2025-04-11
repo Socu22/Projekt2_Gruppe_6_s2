@@ -1,5 +1,3 @@
-
-
 :root {
   --primary-color: #0081fd;
   --secondary-color: #0081fd;
@@ -37,7 +35,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  background-color: var(--background-light);
+  background-color: var(--primary-color);
   box-shadow: var(--shadow-md);
   position: sticky;
   top: 0;
@@ -48,12 +46,15 @@ body {
 .app-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: white;
   margin: 0;
+  padding-left: 20px;
 }
+
 .main-nav {
   display: flex;
   gap: 3rem;
+  padding-right: 20px;
 }
 
 .nav-link {
@@ -63,20 +64,19 @@ body {
   padding: 0.5rem 0;
   position: relative;
   transition: all 0.2s;
-  text-shadow: -20px 20px 0px rgba(0, 0, 0, 0.3);
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .nav-link:hover {
-  color: #62bef1;
-  text-shadow: none;
+  color: white;
   opacity: 1;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .nav-link.active {
-  color: #62bef1;
-  text-shadow: none;
+  color: white;
   opacity: 1;
+  font-weight: 600;
 }
 
 .nav-link.active::after {
@@ -86,9 +86,10 @@ body {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #62bef1;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
 }
+
 main {
   padding: 2rem 0;
   flex-grow: 1;
@@ -191,13 +192,13 @@ main {
   align-items: center;
   justify-content: center;
 }
+
 .simple-footer {
   background-color: var(--primary-color);
   color: white;
   width: 100%;
   padding: 2rem 1rem;
   box-shadow: var(--shadow-md);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,7 +207,6 @@ main {
 
 .footer-content {
   text-align: center;
-
 }
 
 .footer-contact {
