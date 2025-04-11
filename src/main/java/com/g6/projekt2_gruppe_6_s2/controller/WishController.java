@@ -92,7 +92,6 @@ public class WishController {
         var wishList = new WishList();
         wishList.setWishes(repo.getWishList(id ));
         wishList.setListId(id);
-        System.out.println("in wishList"+id);
 
 
         model.addAttribute("wishList",wishList);
