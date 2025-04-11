@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
@@ -59,19 +60,34 @@ public class WishController {
 
 
         model.addAttribute("wishList",wishList);
+        assert session != null;
+        session.setAttribute("id",id);
+
+
         return "wishList";
     }
 
     @GetMapping("/getWishInWishList")
-    public String getWishInWishList(@RequestParam("id") int id, Model model){
-        model.addAttribute("listId",id);//the id works until used here idk why. returns a 0 insead of a number
-        System.out.println("in getWishInWishList"+id);
+    public String getWishInWishList(Model model,HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        User user = null;
+        if(session!=null){
+            user = (User)session.getAttribute("activeUser");
+        }
+
+        assert session != null;
+        int _id = (int) session.getAttribute("id");
+        System.out.println("in getWishInWishList"+_id);
+
+
+
+        model.addAttribute("id",_id);//the id works until used here idk why. returns a 0 insead of a number
 
         return "createWishInWishList";
     }
     @GetMapping("/saveWishInWishList")
-    public String postWishInWishList(HttpServletRequest request,
-                                     @RequestParam("listId=id") int listId,
+    public String postWishInWishList(
+                            HttpServletRequest request,Model model,
                                      @RequestParam("price")double price,
                                      @RequestParam("title") String title,
                                      @RequestParam("description") String description,
@@ -83,13 +99,18 @@ public class WishController {
             user = (User)session.getAttribute("activeUser");
         }
 
-        System.out.println("in postWishInWishList"+listId);
+        assert session != null;
+        int _id = (int) session.getAttribute("id");
+
+        model.addAttribute("id",_id);
+
+        System.out.println("in postWishInWishList"+_id);
 
 
         ArrayList<Wish> wishList = new ArrayList<>();
             wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
-            WishList wishListInstance = new WishList(title,listId,wishList);
-            repo.saveWishlist(user.getId(), listId,wishListInstance);
+            WishList wishListInstance = new WishList(title,_id,wishList);
+            repo.saveWishlist(user.getId(), _id,wishListInstance);
 
 
         return "redirect:/Profile";
