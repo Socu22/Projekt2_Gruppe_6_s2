@@ -76,4 +76,20 @@ public class WishListController {
 //        repo.saveWishlist(1,listId,wishListInstance); //saves a dummy
         return "redirect:/Profile";
     }
+    @GetMapping("/deleteWishList")
+    public String deleteWishList(HttpServletRequest request) throws SQLException {
+        HttpSession session = request.getSession(false);
+        User user = null;
+        if(session!=null){
+            user = (User)session.getAttribute("activeUser");
+        }
+        assert session != null;
+        int listId = (int) session.getAttribute("id");
+
+        repo.deleteWishlist(listId);
+
+
+        return "redirect:/Profile";
+    }
+
 }

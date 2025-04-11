@@ -228,9 +228,9 @@ public class WishRepositoryDataBase {
     }
 
     // Delete a wishlist and its associations
-    public void deleteWishlist(int listId, String title) throws SQLException {
+    public void deleteWishlist(int listId) throws SQLException {
         String deleteWishListSQL = "DELETE FROM wishLists WHERE listId = ?";
-        String deleteListHolderSQL = "DELETE FROM listHolders WHERE listId = ? and title=?";
+        String deleteListHolderSQL = "DELETE FROM listHolders WHERE listId = ?";
 
         try (Connection conn = dataSource.getConnection();
              PreparedStatement wishListStmt = conn.prepareStatement(deleteWishListSQL);
@@ -242,7 +242,6 @@ public class WishRepositoryDataBase {
 
             // Delete from listHolders
             listHolderStmt.setInt(1, listId);
-            listHolderStmt.setString(2, title);
             listHolderStmt.executeUpdate();
         }
     }
