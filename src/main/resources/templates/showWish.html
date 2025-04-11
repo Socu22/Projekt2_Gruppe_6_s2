@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
 <header class="app-header">
-    <h1 class="app-title">MyWish</h1>
-    <img class="Logo" src="img/MyWish-Logo.png"/>
+    <div class="header-brand">
+        <img class="logo" th:src="@{/img/MyWish-Logo.png}" alt="MyWish Logo"/>
+    </div>
     <nav class="main-nav">
-        <a href=""          class="nav-link active">Home</a>
-
+        <a href="" class="nav-link active">Home</a>
         <a href="Login"     class="nav-link" th:unless="${isLoggedIn }">Login</a>
         <a href="Logout"     class="nav-link" th:if="${isLoggedIn}">Log Out</a>
         <a href="Profile"     class="nav-link" th:if="${isLoggedIn}">My Profile</a>
-        <a href="AboutUs"   class="nav-link">About Us</a>
+        <a href="AboutUs" class="nav-link">About Us</a>
     </nav>
 </header>
 <div th:unless="${isUser}">
@@ -54,6 +55,12 @@
             <button type="submit">Edit Wish</button>
         </div>
     </form>
+    <form th:action="@{/removeWish}" th:method="get">
+        <div class="form-group">
+            <button type="submit">Delete Wish</button>
+        </div>
+    </form>
+
 </div>
 
 </body>

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <style>
@@ -48,17 +49,21 @@
 </style>
 <body>
 <header class="app-header">
-  <h1 class="app-title">MyWish</h1>
-  <img class="Logo" src="img/MyWish-Logo.png"/>
+  <div class="header-brand">
+    <img class="logo" th:src="@{/img/MyWish-Logo.png}" alt="MyWish Logo"/>
+  </div>
   <nav class="main-nav">
-    <a href=""          class="nav-link active">Home</a>
-
+    <a href="" class="nav-link active">Home</a>
     <a href="Login"     class="nav-link" th:unless="${isLoggedIn }">Login</a>
     <a href="Logout"     class="nav-link" th:if="${isLoggedIn}">Log Out</a>
     <a href="Profile"     class="nav-link" th:if="${isLoggedIn}">My Profile</a>
-    <a href="AboutUs"   class="nav-link">About Us</a>
+    <a href="AboutUs" class="nav-link">About Us</a>
   </nav>
 </header>
+<div th:if="${isLoggedIn}">
+  <span>Send Wishlist To Others(Right click on the link, copy it and send to other): </span>
+  <a th:href="${URL}" th:text="${URL}"></a>
+</div>
 
 <div class="container">
 
@@ -66,7 +71,7 @@
     <form th:action="@{Wish}" th:method="get">
     <a th:href="@{Wish(wishId=${wish.id}, listId = ${wishList.listId})}" style="text-decoration: none; color: inherit;" >
       <div style="padding: 4%;">
-        <img  src="https://images.squarespace-cdn.com/content/v1/65d4f4d5f3f72e6e3d20e52a/fac0c84a-24f1-4e70-99d3-afd24f94d556/cumulus-2.jpg?format=1500w" alt="picture not found" />
+        <img  th:src="${wish.image}" alt="image not found" onerror="this.src='https://images.squarespace-cdn.com/content/v1/65d4f4d5f3f72e6e3d20e52a/fac0c84a-24f1-4e70-99d3-afd24f94d556/cumulus-2.jpg?format=1500w';" />
         <div style="width: 95%">
         <span th:text="${wish.title}"  ></span>
         <span th:text="${wish.link}" ></span>

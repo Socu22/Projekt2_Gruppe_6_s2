@@ -72,6 +72,7 @@ public class WishController {
             user = (User)session.getAttribute("activeUser");
             session.setAttribute("lastActiveWishList",id);
             session.setAttribute("id",id);
+            model.addAttribute("URL" ,request.getRequestURL().toString() + "?" + request.getQueryString());
         }
         model.addAttribute("isLoggedIn",user != null);
 
