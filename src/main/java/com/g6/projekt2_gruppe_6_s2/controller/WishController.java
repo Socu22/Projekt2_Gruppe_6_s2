@@ -70,6 +70,8 @@ public class WishController {
         User user = null;
         if(session!=null){
             user = (User)session.getAttribute("activeUser");
+            session.setAttribute("lastActiveWishList",id);
+            session.setAttribute("id",id);
         }
         model.addAttribute("isLoggedIn",user != null);
 
@@ -79,7 +81,7 @@ public class WishController {
             isUser = true;
         }
         model.addAttribute("isUser",isUser );
-        session.setAttribute("lastActiveWishList",id);
+
 
         var wishList = new WishList();
         wishList.setWishes(repo.getWishList(id ));
@@ -89,7 +91,7 @@ public class WishController {
 
         model.addAttribute("wishList",wishList);
         assert session != null;
-        session.setAttribute("id",id);
+
 
 
         return "wishList";
