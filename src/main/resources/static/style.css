@@ -34,13 +34,19 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1vh 0;
   background-color: var(--primary-color);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   position: sticky;
   top: 0;
   z-index: 100;
   width: 100%;
+}
+
+.logo {
+  height: max(15vh);
+  margin-left: 1vh;
 }
 
 .app-title {
