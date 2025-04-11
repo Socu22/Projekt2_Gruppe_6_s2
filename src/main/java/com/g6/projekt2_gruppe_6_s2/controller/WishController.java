@@ -99,20 +99,6 @@ public class WishController {
 
     @GetMapping("/getWishInWishList")
     public String getWishInWishList(Model model,HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-        User user = null;
-        if(session!=null){
-            user = (User)session.getAttribute("activeUser");
-        }
-
-        assert session != null;
-        int _id = (int) session.getAttribute("id");
-        System.out.println("in getWishInWishList"+_id);
-
-
-
-        model.addAttribute("id",_id);//the id works until used here idk why. returns a 0 insead of a number
-
         return "createWishInWishList";
     }
     @GetMapping("/saveWishInWishList")
