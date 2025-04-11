@@ -227,42 +227,10 @@ public class WishRepositoryDataBase {
         }
     }
 
-    // Add wishes to an existing wishlist ------- outdated
-    public void addWishesToWishlist(int listId, List<Integer> wishIds) throws SQLException {
-        String insertWishListSQL = "INSERT INTO wishLists (listId, wishId) VALUES (?, ?)";
-
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement wishListStmt = conn.prepareStatement(insertWishListSQL)) {
-
-            for (int wishId : wishIds) {
-                wishListStmt.setInt(1, listId);
-                wishListStmt.setInt(2, wishId);
-                wishListStmt.addBatch();
-            }
-            wishListStmt.executeBatch();
-        }
-    }
-
-    // Remove wishes from an existing wishlist ------outdated
-    public void removeWishesFromWishlist(int listId, List<Integer> wishIds) throws SQLException {
-        String deleteWishListSQL = "DELETE FROM wishLists WHERE listId = ? AND wishId = ?";
-
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement wishListStmt = conn.prepareStatement(deleteWishListSQL)) {
-
-            for (int wishId : wishIds) {
-                wishListStmt.setInt(1, listId);
-                wishListStmt.setInt(2, wishId);
-                wishListStmt.addBatch();
-            }
-            wishListStmt.executeBatch();
-        }
-    }
-
-    // Delete a wishlist and its associations ---- outdated
-    public void deleteWishlist(int listId) throws SQLException {
+    // Delete a wishlist and its associations
+    public void deleteWishlist(int listId, String title) throws SQLException {
         String deleteWishListSQL = "DELETE FROM wishLists WHERE listId = ?";
-        String deleteListHolderSQL = "DELETE FROM listHolders WHERE listId = ?";
+        String deleteListHolderSQL = "DELETE FROM listHolders WHERE listId = ? and title=?";
 
         try (Connection conn = dataSource.getConnection();
              PreparedStatement wishListStmt = conn.prepareStatement(deleteWishListSQL);
@@ -274,9 +242,26 @@ public class WishRepositoryDataBase {
 
             // Delete from listHolders
             listHolderStmt.setInt(1, listId);
+            listHolderStmt.setString(2, title);
             listHolderStmt.executeUpdate();
         }
     }
+
+
+
+    // Remove wishes from an existing wishlist
+    public void removeWishFromWishlist(int wishId) throws SQLException {
+        String deleteWishListSQL = "DELETE FROM wishLists WHERE wishId = ?";
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement wishListStmt = conn.prepareStatement(deleteWishListSQL)) {
+
+            wishListStmt.setInt(1, wishId);
+            wishListStmt.executeUpdate();
+        }
+    }
+
+
 
 
     // outdated

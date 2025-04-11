@@ -27,18 +27,18 @@ public class UserController
     }
 
     @PostMapping("/VerifyLogin")
-    public String verify(@RequestParam("username") String username,
-                         @RequestParam("password") String password,
+    public String verify(@RequestParam("username")  String username,
+                         @RequestParam("password")  String password,
                          HttpServletRequest request,
                          Model model)
     {
-        model.addAttribute("loginMsg", "");
+        // model.addAttribute("loginMsg", "");
 
         try
         {
             User user = userRepo.getUser(username, password);
 
-            if (user != null)
+            if (user != null) // TODO: redundant 'if'?
             {
                 HttpSession session = request.getSession();
 
@@ -48,10 +48,11 @@ public class UserController
 
                 return "redirect:/Profile";
             }
-            System.out.println(LocalDateTime.now() + "\u001B[32m  LOGN\u001B[35m fail\u001B[0m ---- [" + username + "]");
+            model.addAttribute("registerMsg", "An unknown Error has occurred."); // should NEVER happen
         }
         catch (SQLException|IllegalArgumentException e)
         {
+            System.out.println(LocalDateTime.now() + "\u001B[32m  LOGN\u001B[35m fail\u001B[0m ---- [" + username + "]");
             model.addAttribute("loginMsg", e.getMessage());
         }
 
@@ -61,16 +62,24 @@ public class UserController
     @PostMapping("/Register")
     public String register(@RequestParam("username") String username,
                            @RequestParam("password") String password,
+                           @RequestParam("password2") String password2,
                            HttpServletRequest request,
                            Model model)
     {
-        model.addAttribute("registerMsg", "");
+        // model.addAttribute("registerMsg", "");
 
         try
         {
+            if (!password.equals(password2)) throw new IllegalArgumentException("Passwords do not match.");
+
+            if (delete(username, password, model))
+            {
+                return "login";
+            }
+
             User user = userRepo.addUser(username, password);
 
-            if (user != null)
+            if (user != null) // TODO: redundant 'if'?
             {
                 HttpSession session = request.getSession();
 
@@ -80,12 +89,35 @@ public class UserController
 
                 return "redirect:/Profile";
             }
+            model.addAttribute("registerMsg", "An unknown Error has occurred."); // should NEVER happen
         }
         catch (SQLException|IllegalArgumentException e)
         {
+            System.out.println(LocalDateTime.now() + "\u001B[32m  RGST\u001B[35m fail\u001B[0m ---- [" + username + "]");
             model.addAttribute("registerMsg", e.getMessage());
         }
 
         return "login"; // Return to the login page with an error message
+    }
+
+    private boolean delete(String username,
+                           String password,
+                           Model model)
+            throws SQLException
+    {
+        User user;
+
+        try
+        {
+            user = userRepo.getUser(username, password);
+            userRepo.deleteUser(user, password);
+            model.addAttribute("registerMsg", "User deleted successfully.");
+        }
+        catch (IllegalArgumentException e)
+        {
+            return false; // if no such user exists
+        }
+
+        return true;
     }
 }
