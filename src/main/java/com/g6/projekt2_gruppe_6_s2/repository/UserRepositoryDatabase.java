@@ -81,7 +81,7 @@ public class UserRepositoryDatabase
             throws SQLException, IllegalArgumentException
     {
         User user;
-        String sql = "SELECT * FROM users WHERE username = ? and password = ?";
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql))
@@ -97,7 +97,7 @@ public class UserRepositoryDatabase
 
                     user.setId      (resultSet.getInt   ("userId"));
                     user.setUsername(resultSet.getString("username"));
-                    user.setPassword(resultSet.getString("password"));
+                    //                                    not giving the password  ;)
                     user.setImgPath (resultSet.getString("img"));
                 }
                 else
@@ -137,5 +137,27 @@ public class UserRepositoryDatabase
         }
 
         return false;
+    }
+
+    public void deleteUser(User user, String password)
+            throws SQLException
+    {
+        String sql = "DELETE FROM listHolders WHERE userId = ?;" +
+                     "DELETE FROM users WHERE userId = ? AND username = ? AND password = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql))
+        {
+            statement.setString(1, ""+user.getId());
+            statement.setString(2, ""+user.getId());
+            statement.setString(3, user.getUsername());
+            statement.setString(4, password);
+            statement.execute();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new SQLException("Failed to Connect to Database.");
+        }
     }
 }
