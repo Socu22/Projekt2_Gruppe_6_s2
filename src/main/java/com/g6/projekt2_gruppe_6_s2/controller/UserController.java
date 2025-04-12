@@ -30,7 +30,7 @@ public class UserController
     public String logout(HttpServletRequest request)
     {
         request.getSession(false).invalidate();
-        return "login";
+        return "index";
     }
 
     @PostMapping("/VerifyLogin")
@@ -39,8 +39,6 @@ public class UserController
                          HttpServletRequest request,
                          Model model)
     {
-        // model.addAttribute("loginMsg", "");
-
         try
         {
             User user = userRepo.getUser(username, password);
@@ -67,14 +65,12 @@ public class UserController
     }
 
     @PostMapping("/Register")
-    public String register(@RequestParam("username") String username,
-                           @RequestParam("password") String password,
+    public String register(@RequestParam("username")  String username,
+                           @RequestParam("password")  String password,
                            @RequestParam("password2") String password2,
                            HttpServletRequest request,
                            Model model)
     {
-        // model.addAttribute("registerMsg", "");
-
         try
         {
             if (!password.equals(password2)) throw new IllegalArgumentException("Passwords do not match.");

@@ -8,18 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <header class="app-header">
-        <div class="header-brand">
-            <img class="logo" th:src="@{/img/MyWish-Logo.png}" alt="MyWish Logo"/>
-        </div>
-        <nav class="main-nav">
-            <a href="Home" class="nav-link">Home</a>
-            <a href="Login"     class="nav-link active" th:unless="${isLoggedIn }">Login</a>
-            <a href="Logout"     class="nav-link" th:if="${isLoggedIn}">Log Out</a>
-            <a href="Profile"     class="nav-link" th:if="${isLoggedIn}">My Profile</a>
-            <a href="AboutUs" class="nav-link">About Us</a>
-        </nav>
-    </header>
+    <header th:insert="fragments :: header" class="app-header"></header>
 
     <main>
         <div class="wishlist-content">
@@ -49,11 +38,7 @@
         </div>
     </main>
 
-    <footer class="simple-footer">
-        <p class="copyright">© 2025 MyWish</p>
-        <p>📞 <a href="tel:+4512345678">12 34 56 78</a></p>
-        <p>✉️ <a href="mailto:mywish@gmail.com">mywish@gmail.com</a></p>
-    </footer>
+    <footer th:insert="fragments :: footer" class="simple-footer"></footer>
 </div>
 </body>
 </html>

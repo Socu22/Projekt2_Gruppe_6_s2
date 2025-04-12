@@ -8,10 +8,7 @@
 </head>
 <body>
 <div class="container">
-  <header class="app-header">
-    <h1 class="app-title">MyWish</h1>
-    <img class="Logo" src="img/MyWish-Logo.png" alt="MyWish Logo"/>
-  </header>
+  <header th:insert="fragments :: header" class="app-header"></header>
 
   <main>
     <div class="about-container">
@@ -65,11 +62,8 @@
       </div>
     </div>
   </main>
-  <footer class="simple-footer">
-    <p class="copyright">© 2025 MyWish</p>
-    <p>📞 <a href="tel:+4512345678">12 34 56 78</a></p>
-    <p>✉️ <a href="mailto:mywish@gmail.com">mywish@gmail.com</a></p>
-  </footer>
+
+  <footer th:insert="fragments :: footer" class="simple-footer"></footer>
 </div>
 </body>
 </html>
