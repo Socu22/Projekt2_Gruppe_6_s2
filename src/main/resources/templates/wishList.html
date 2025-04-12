@@ -51,7 +51,7 @@
 
 <body>
 <div class="container">
-  <header th:insert="fragments :: header" class="app-header"></header>
+  <header th:insert="~{fragments :: header}" class="app-header"></header>
 
   <main>
     <div th:if="${isLoggedIn}">
@@ -89,7 +89,7 @@
     </div>
   </main>
 
-  <footer th:insert="fragments :: footer" class="simple-footer"></footer>
+  <footer th:insert="~{fragments :: footer}" class="simple-footer"></footer>
 </div>
 </body>
 </html>
