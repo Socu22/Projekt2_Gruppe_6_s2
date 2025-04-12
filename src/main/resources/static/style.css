@@ -25,9 +25,9 @@ body {
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
+  min-width: 800px;
   padding: 20px;
-  flex-grow: 1;
+  align-self: center;
 }
 
 .app-header {
@@ -38,15 +38,59 @@ body {
   background-color: var(--primary-color);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
-  position: sticky;
   top: 0;
   z-index: 100;
   width: 100%;
 }
 
+.simple-footer {
+  background-color: var(--primary-color);
+  color: white;
+  width: 100%;
+  padding: 2rem 1rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+}
+
+.container header{
+  position: sticky;
+  top:0;
+}
+
+.container footer{
+  position: sticky;
+  bottom:0;
+}
+
+.bookend {
+  background-color: var(--primary-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  display: flex;
+  padding: 1%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bookend a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.bookend a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
 .logo {
-  height: max(15vh);
-  margin-left: 1vh;
+  height: 16vh;
+  border-radius: var(--radius-md);
 }
 
 .app-title {
@@ -198,18 +242,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.simple-footer {
-  background-color: var(--primary-color);
-  color: white;
-  width: 100%;
-  padding: 2rem 1rem;
-  box-shadow: var(--shadow-md);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 150px;
 }
 
 .footer-content {

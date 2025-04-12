@@ -34,16 +34,6 @@
     width: 100%;
 
   }
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    width: 100%;
-  }
-
-
   .square:hover {
     background-color: #f0f0f0;
   }
@@ -51,9 +41,9 @@
 
 <body>
 <div class="container">
-  <header th:insert="~{fragments :: header}" class="app-header"></header>
+  <header th:insert="~{fragments :: header}"></header>
 
-  <main>
+  <main class="wishlist-content">
     <div th:if="${isLoggedIn}">
       <span>Send Wishlist To Others(Right click on the link, copy it and send to other): </span>
       <a th:href="${URL}" th:text="${URL}"></a>
@@ -95,7 +85,7 @@
     </div>
   </main>
 
-  <footer th:insert="~{fragments :: footer}" class="simple-footer"></footer>
+  <footer th:insert="~{fragments :: footer}"></footer>
 </div>
 </body>
 </html>
