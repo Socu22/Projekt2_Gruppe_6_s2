@@ -33,7 +33,7 @@
                 <input type="submit" value="Log in" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${loginMsg}"></span>
             </form>
         </section>
-        <br>
+        <br><br>
         <section>
             <h2 class="section-title">Register or Delete user</h2>
             <form th:action="@{/Register}" method="post">
@@ -41,13 +41,19 @@
                 <input type="text" id="newUsername" name="username" placeholder="username" required/> <br/>
                 <label for="password">Password:&nbsp;</label>
                 <input type="password" id="newPassword" name="password" placeholder="password" required /> <br/>
-                <label for="password">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <label for="password">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 <input type="password" id="newPassword2" name="password2" placeholder="repeat password" required /> <br/>
                 <input type="submit" value="Submit" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${registerMsg}"></span>
             </form>
         </section>
         </div>
     </main>
+
+    <footer class="simple-footer">
+        <p class="copyright">© 2025 MyWish</p>
+        <p>📞 <a href="tel:+4512345678">12 34 56 78</a></p>
+        <p>✉️ <a href="mailto:mywish@gmail.com">mywish@gmail.com</a></p>
+    </footer>
 </div>
 </body>
 </html>

@@ -47,29 +47,36 @@
     </style>
 </head>
 <body>
-<header class="app-header">
-    <div class="header-brand">
-        <img class="logo" th:src="@{/img/MyWish-Logo.png}" alt="MyWish Logo"/>
-    </div>
-    <nav class="main-nav">
-        <a href="Home" class="nav-link">Home</a>
-        <a href="Login"     class="nav-link" th:unless="${isLoggedIn }">Login</a>
-        <a href="Logout"     class="nav-link" th:if="${isLoggedIn}">Log Out</a>
-        <a href="Profile"     class="nav-link" th:if="${isLoggedIn}">My Profile</a>
-        <a href="AboutUs" class="nav-link">About Us</a>
-    </nav>
-</header>
 <div class="container">
-    <h2>Create a New Wishlist</h2>
-    <form th:action="@{/saveCreateWishList}" th:method="get">
-        <div class="form-group">
-            <label for="title">Wishlist Title:</label>
-            <input type="text" id="title" name="title" required>
+    <header class="app-header">
+        <div class="header-brand">
+            <img class="logo" th:src="@{/img/MyWish-Logo.png}" alt="MyWish Logo"/>
         </div>
-        <div class="form-group">
-            <button type="submit">Create Wishlist</button>
-        </div>
-    </form>
+        <nav class="main-nav">
+            <a href="Home" class="nav-link">Home</a>
+            <a href="Login"     class="nav-link" th:unless="${isLoggedIn }">Login</a>
+            <a href="Logout"     class="nav-link" th:if="${isLoggedIn}">Log Out</a>
+            <a href="Profile"     class="nav-link" th:if="${isLoggedIn}">My Profile</a>
+            <a href="AboutUs" class="nav-link">About Us</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Create a New Wishlist</h2>
+        <form th:action="@{/saveCreateWishList}" th:method="get">
+            <div class="form-group">
+                <label for="title">Wishlist Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Create Wishlist</button>
+            </div>
+        </form>
+    </main>
+    <footer class="simple-footer">
+        <p class="copyright">© 2025 MyWish</p>
+        <p>📞 <a href="tel:+4512345678">12 34 56 78</a></p>
+        <p>✉️ <a href="mailto:mywish@gmail.com">mywish@gmail.com</a></p>
+    </footer>
 </div>
 </body>
 </html>

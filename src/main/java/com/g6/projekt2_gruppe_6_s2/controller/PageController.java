@@ -8,22 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class PageController {
-
-
-    @Autowired
-    WishRepositoryDataBase repo;
-
-    @Autowired
-    UserRepositoryDatabase repoUser;
+public class PageController //for pages independent on repos, sessions, and "advanced" handling
+{
 
     @GetMapping("/")// This is the homepage
     public String getIndex(){
         return "index";
     }
     @GetMapping("/Home")// This is the homepage
-    public String Home(){
+    public String home(){
         return "index";
+    }
+    @GetMapping("/AboutUs")// This is the homepage
+    public String aboutUs(){
+        return "aboutUs";
     }
 
 }

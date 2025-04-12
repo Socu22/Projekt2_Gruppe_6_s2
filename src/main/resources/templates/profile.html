@@ -48,49 +48,55 @@
   }
 </style>
 <body>
-<header class="app-header">
-  <div class="header-brand">
-    <img class="logo" th:src="@{/img/MyWish-Logo.png}" alt="MyWish Logo"/>
-  </div>
-  <nav class="main-nav">
-    <a href="Home" class="nav-link">Home</a>
-    <a href="Login"     class="nav-link" th:unless="${isLoggedIn }">Login</a>
-    <a href="Logout"     class="nav-link" th:if="${isLoggedIn}">Log Out</a>
-    <a href="Profile"     class="nav-link active" th:if="${isLoggedIn}">My Profile</a>
-    <a href="AboutUs" class="nav-link">About Us</a>
-  </nav>
-</header>
-
 <div class="container">
-
-  <div class="square" th:each="wishList : ${wishLists}">
-    <form th:action="@{WishList}" th:method="get">
-
-    <a th:href="@{WishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
-
-    <div style="padding: 4%">
-        <img  th:src="@{/img/MyWish-Cloud.png}" alt="picture not found" />
-
-      <label>Contents: </label>
-      <span th:text="${wishList.getTitle()}"></span>
-      <div th:each="wish : ${wishList.getWishes()}">
-        <span> -</span>
-        <span th:text="${wish.title}" ></span>
-      </div>
+  <header class="app-header">
+    <div class="header-brand">
+      <img class="logo" th:src="@{/img/MyWish-Logo.png}" alt="MyWish Logo"/>
     </div>
-    </a>
-    </form>
-  </div>
+    <nav class="main-nav">
+      <a href="Home" class="nav-link">Home</a>
+      <a href="Login"     class="nav-link" th:unless="${isLoggedIn }">Login</a>
+      <a href="Logout"     class="nav-link" th:if="${isLoggedIn}">Log Out</a>
+      <a href="Profile"     class="nav-link active" th:if="${isLoggedIn}">My Profile</a>
+      <a href="AboutUs" class="nav-link">About Us</a>
+    </nav>
+  </header>
 
-  <div class="square" >
-    <a href="getCreateWishList" style="text-decoration: none; color: inherit;" >
-      <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
-        <img  th:src="@{/img/MyWish-Add.png}" alt="picture not found"  style="height: 50%; width: 50%;"/>
+  <main>
+    <div class="square" th:each="wishList : ${wishLists}">
+      <form th:action="@{WishList}" th:method="get">
 
+      <a th:href="@{WishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
+
+      <div style="padding: 4%">
+          <img  th:src="@{/img/MyWish-Cloud.png}" alt="picture not found" />
+
+        <label>Contents: </label>
+        <span th:text="${wishList.getTitle()}"></span>
+        <div th:each="wish : ${wishList.getWishes()}">
+          <span> -</span>
+          <span th:text="${wish.title}" ></span>
+        </div>
       </div>
-    </a>
-  </div>
+      </a>
+      </form>
+    </div>
 
+    <div class="square" >
+      <a href="getCreateWishList" style="text-decoration: none; color: inherit;" >
+        <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
+          <img  th:src="@{/img/MyWish-Add.png}" alt="picture not found"  style="height: 50%; width: 50%;"/>
+
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="simple-footer">
+    <p class="copyright">© 2025 MyWish</p>
+    <p>📞 <a href="tel:+4512345678">12 34 56 78</a></p>
+    <p>✉️ <a href="mailto:mywish@gmail.com">mywish@gmail.com</a></p>
+  </footer>
 </div>
 </body>
 </html>
