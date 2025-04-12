@@ -59,6 +59,12 @@
       <a th:href="${URL}" th:text="${URL}"></a>
     </div>
 
+    <div th:if="${isLoggedIn}">
+      <form th:action="@{/deleteWishList}" method="get">
+        <button type="submit">Delete Wishlist</button>
+      </form>
+    </div>
+
     <div class="square" th:each="wish : ${wishList.getWishes()}">
       <form th:action="@{Wish}" th:method="get">
       <a th:href="@{Wish(wishId=${wish.id}, listId = ${wishList.listId})}" style="text-decoration: none; color: inherit;" >

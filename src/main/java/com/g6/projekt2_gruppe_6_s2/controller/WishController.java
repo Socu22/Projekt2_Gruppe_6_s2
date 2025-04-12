@@ -122,7 +122,7 @@ public class WishController {
 
         assert session != null;
         int _id = (int) session.getAttribute("id");
-        String lastActiveListId = (String) session.getAttribute("lastActiveWishList");
+        int lastActiveListId = (int) session.getAttribute("lastActiveWishList");
 
         model.addAttribute("id",_id);
 
