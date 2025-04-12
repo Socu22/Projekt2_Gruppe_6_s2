@@ -136,7 +136,7 @@ public class WishController {
 
 
 
-        return "redirect:/redirect:WishList?id="+lastActiveListId;
+        return "redirect:/WishList?id="+lastActiveListId;
     }
     @GetMapping("/editWishInWishList")
     public String editWishInWishList(
