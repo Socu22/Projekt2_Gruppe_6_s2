@@ -2,14 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="header" class="bookend">
-  <div class="header-brand">
+  <div style="vertical-align: center;">
     <img class="logo" th:src="@{/img/MyWish-Logo.png}" alt="MyWish Logo"/>
   </div>
-  <nav class="main-nav">
+  <p class="copyright" style="align-self: center; white-space: nowrap; text-align: center">
+    <strong>Turning Wishes<br>Into Gifts</strong>
+  </p>
+  <nav class="main-nav" style="align-self: end">
     <a href="Home"    class="nav-link">Home</a>
-    <a href="Login"   class="nav-link"        th:unless="${isLoggedIn}">Login</a>
-    <a href="Logout"  class="nav-link"        th:if=    "${isLoggedIn}">Log Out</a>
-    <a href="Profile" class="nav-link active" th:if=    "${isLoggedIn}">My Profile</a>
+    <a href="Login"   class="nav-link" th:unless="${isLoggedIn}">Login</a>
+    <a href="Logout"  class="nav-link" th:if=    "${isLoggedIn}">Log Out</a>
+    <a href="Profile" class="nav-link" th:if=    "${isLoggedIn}">My Profile</a>
     <a href="AboutUs" class="nav-link">About Us</a>
   </nav>
 </div>
@@ -17,9 +20,85 @@
 <div th:fragment="footer" class="bookend">
   <p class="copyright">© 2025 MyWish</p>
   <div>
-    <p>📞 <a href="tel:+4512345678">12 34 56 78</a></p>
-    <p>✉️ <a href="mailto:mywish@gmail.com">mywish@gmail.com</a></p>
+    <p>📞 <a href="tel:+4512345678">+45 12 34 56 78</a></p>
+    <p>📧 <a href="mailto:mywish@bogusgmail.com">mywish@bogusmail.com</a></p>
   </div>
+</div>
+
+<div th:fragment="example" class="wishlist-container">
+  <div class="wishlist-content">
+    <h2 class="section-title">My Wishes & Wishlists</h2>
+
+    <section>
+      <h3 class="wish-category">My Wishes:</h3>
+      <div class="wish-item">
+        <label class="wish-checkbox">
+          <input type="checkbox">
+          <span>Wish 1</span>
+        </label>
+      </div>
+      <div class="wish-item">
+        <label class="wish-checkbox">
+          <input type="checkbox">
+          <span>Wish 2</span>
+        </label>
+      </div>
+      <div class="wish-item">
+        <label class="wish-checkbox">
+          <input type="checkbox" checked>
+          <span>Wish 3</span>
+        </label>
+      </div> <div class="wish-item">
+      <label class="wish-checkbox">
+        <input type="checkbox" checked>
+        <span>Wish 4</span>
+      </label>
+    </div> <div class="wish-item">
+      <label class="wish-checkbox">
+        <input type="checkbox" checked>
+        <span>Wish 5</span>
+      </label>
+    </div>
+    </section>
+
+    <section>
+      <h3 class="wish-category">My Wishlists: </h3>
+      <div class="wish-item">
+        <label class="wish-checkbox">
+          <input type="checkbox">
+          <span>Wish 1</span>
+        </label>
+      </div>
+      <div class="wish-item">
+        <label class="wish-checkbox">
+          <input type="checkbox">
+          <span>Wish 2</span>
+        </label>
+      </div>
+      <div class="wish-item">
+        <label class="wish-checkbox">
+          <input type="checkbox">
+          <span>Wish 3</span>
+        </label>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+<div th:fragment="advert"  class="sidebar">
+    <div class="sidebar-card">
+      <h3 class="share-title">Share Wishlist</h3>
+      <div class="share-options">
+        <button class="share-btn">Facebook</button>
+        <button class="share-btn">Email</button>
+        <button class="share-btn">Copy Link</button>
+      </div>
+    </div>
+
+    <div class="ad-container">
+      Marketing/Marketing
+    </div>
 </div>
 
 </html>

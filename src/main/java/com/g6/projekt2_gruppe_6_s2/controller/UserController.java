@@ -21,15 +21,16 @@ public class UserController
     UserRepositoryDatabase userRepo;
 
     @GetMapping("/Login")
-    public String login()
+    public String login(HttpServletRequest request, Model model)
     {
+        if (getSession(request, model) != null) return "redirect:/Profile";
         return "login";
     }
 
     @GetMapping("/Logout")
     public String logout(HttpServletRequest request)
     {
-        request.getSession(false).invalidate();
+        request.getSession().invalidate();
         return "index";
     }
 
@@ -45,9 +46,7 @@ public class UserController
 
             if (user != null) // TODO: redundant 'if'?
             {
-                HttpSession session = request.getSession();
-
-                session.setAttribute("activeUser", user);
+                setSession(user, request, model);
 
                 System.out.println(LocalDateTime.now() + "\u001B[32m  LOGN\u001B[35m user\u001B[0m ---- [" + username + "]");
 
@@ -85,9 +84,7 @@ public class UserController
 
             if (user != null) // TODO: redundant 'if'?
             {
-                HttpSession session = request.getSession();
-
-                session.setAttribute("activeUser", user);
+                setSession(user, request, model);
 
                 System.out.println(LocalDateTime.now() + "\u001B[32m  RGST\u001B[35m user\u001B[0m ---- [" + username + "]");
 
@@ -123,5 +120,23 @@ public class UserController
         }
 
         return true;
+    }
+
+    private void setSession(User user, HttpServletRequest request, Model model)
+    {
+        HttpSession session = request.getSession();
+
+        session.setMaxInactiveInterval(1200);
+        session.setAttribute("activeUser", user);
+        model.addAttribute("isLoggedIn",true);
+    }
+
+    public static HttpSession getSession(HttpServletRequest request, Model model)
+    {
+        HttpSession session = request.getSession(false);
+        model.addAttribute("isLoggedIn",session != null);
+        if(session != null) model.addAttribute("activeUser",session.getAttribute("activeUser"));
+
+        return session;
     }
 }

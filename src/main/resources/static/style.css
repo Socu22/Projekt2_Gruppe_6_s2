@@ -30,6 +30,23 @@ body {
   align-self: center;
 }
 
+.container header{
+  position: sticky;
+  top:0;
+}
+
+.container footer{
+  position: sticky;
+  bottom:0;
+}
+
+.container main{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  height: 100%;
+}
+
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -55,16 +72,6 @@ body {
   min-height: 150px;
 }
 
-.container header{
-  position: sticky;
-  top:0;
-}
-
-.container footer{
-  position: sticky;
-  bottom:0;
-}
-
 .bookend {
   background-color: var(--primary-color);
   border-radius: var(--radius-md);
@@ -73,6 +80,10 @@ body {
   display: flex;
   padding: 1%;
   justify-content: space-between;
+  align-items: center;
+}
+
+.bookend div {
   align-items: center;
 }
 
@@ -89,7 +100,7 @@ body {
 }
 
 .logo {
-  height: 16vh;
+  height: 12vh;
   border-radius: var(--radius-md);
 }
 

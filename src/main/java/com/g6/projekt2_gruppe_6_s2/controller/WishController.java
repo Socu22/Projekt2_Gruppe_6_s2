@@ -27,9 +27,6 @@ public class WishController {
 
     @Autowired
     WishRepositoryDataBase repo;
-    WishRepository repo2;
-
-
 
     @GetMapping("/Wish")// change this to connect to a users list somehow
     public String Wish(HttpServletRequest request, @RequestParam("wishId") int wishId,@RequestParam("listId") int listId, Model model){

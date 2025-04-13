@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:href="@{style.css}">
 </head>
+
 <style>
   .square {
     background: #fff;
@@ -33,7 +34,6 @@
     width: 100%;
 
   }
-
   .square:hover {
     background-color: #f0f0f0;
   }
@@ -45,36 +45,33 @@
 
   <main>
     <div  class="wishlist-content">
-      <div class="square" th:each="wishList : ${wishLists}">
+      <div class="wish-item" th:each="wishList : ${wishLists}">
         <form th:action="@{WishList}" th:method="get">
 
         <a th:href="@{WishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
 
         <div style="padding: 4%">
-            <img  th:src="@{/img/MyWish-Cloud.png}" alt="picture not found" />
 
           <label>WishList: </label>
           <span th:text="${wishList.getListId()} "></span>
           <span th:text="${wishList.getTitle()}"></span>
-          <div th:each="wish : ${wishList.getWishes()}">
-            <span> -</span>
-            <span th:text="${wish.title}" ></span>
-          </div>
         </div>
         </a>
         </form>
       </div>
 
-      <div class="square" >
+      <div class="wish-item" >
         <a href="getCreateWishList" style="text-decoration: none; color: inherit;" >
           <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
-            <img  th:src="@{/img/MyWish-Add.png}" alt="picture not found"  style="height: 50%; width: 50%;"/>
+            <img  th:src="@{/img/MyWish-Add.png}" alt="picture not found"  style="height: 12vh;"/>
 
           </div>
         </a>
       </div>
     </div>
   </main>
+
+  <aside th:insert="~{fragments :: advert}"></aside>
 
   <footer th:insert="~{fragments :: footer}"></footer>
 </div>
