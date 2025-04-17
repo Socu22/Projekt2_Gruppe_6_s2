@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyWish </title>
+  <title>MyWish</title>
   <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
@@ -11,10 +11,46 @@
   <header th:insert="~{fragments :: header}"></header>
 
   <main>
+    <div class="wishlist-container">
+      <div class="wishlist-content">
+        <div class="content-card">
+          <h2 class="section-title">Welcome to MyWish</h2>
+          <p class="about-text">
+            Creating and sharing your wishlist has never been easier! At MyWish, we offer a streamlined,
+            user-friendly platform where you can effortlessly create, manage, and share your
+            personal wishlist with your friends and family.
+          </p>
+        </div>
 
+        <div class="content-card">
+          <h2 class="section-title">Why Choose Us?</h2>
+          <ul>
+            <li>✔ <strong>Simple & Private</strong> – No unnecessary features, just a clean and intuitive way to build your wishlist.</li>
+            <li>✔ <strong>Easy Sharing</strong> – Send a direct link to friends and family — no accounts required for them to view it.</li>
+            <li>✔ <strong>Full Control</strong> – Create, update, or delete your wishes and wishlists anytime.</li>
+            <li>✔ <strong>No Payments, No Clutter</strong> – Focused purely on adding wishes to a wishlist.</li>
+          </ul>
+        </div>
+
+        <div class="content-card">
+          <h2 class="section-title">Create an Account</h2>
+          <p>Ready to start building your personal wishlist? Create your free account now by clicking on the link!</p>
+          <a href="login" class="account-btn">Sign Up Here</a>   <!-- jeg har ikke added en class der matcher fordi vi taler om det i morgen -->
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="sidebar-card ad-container">
+          <div class="ad-content">
+            <p>Premium Features?</p>
+            <p></p>
+            <p>marketing?</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </main>
-
-  <aside th:insert="~{fragments :: advert}"></aside>
 
   <footer th:insert="~{fragments :: footer}"></footer>
 </div>
