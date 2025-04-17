@@ -3,7 +3,6 @@ package com.g6.projekt2_gruppe_6_s2.controller;
 import com.g6.projekt2_gruppe_6_s2.model.User;
 import com.g6.projekt2_gruppe_6_s2.model.Wish;
 import com.g6.projekt2_gruppe_6_s2.model.WishList;
-import com.g6.projekt2_gruppe_6_s2.repository.WishRepository;
 import com.g6.projekt2_gruppe_6_s2.repository.WishRepositoryDataBase;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
