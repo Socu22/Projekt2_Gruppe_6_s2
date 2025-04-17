@@ -11,13 +11,17 @@
     <header th:insert="~{fragments :: header}"></header>
 
     <main>
-        <div th:unless="${isUser}">
-            <h1 th:text="${wish.id}"></h1>
-            <h1 th:text="${wish.title}"></h1>
-            <h1 th:text="${wish.description}"></h1>
-            <h1 th:text="${wish.link}"></h1>
-            <img th:src="${wish.image}" alt="picture not found">
-            <h1 th:text="${wish.price}"></h1>
+        <div th:unless="${isUser}" style="display: flex; align-items: flex-start; gap: 30px;">
+            <div>
+                <img th:src="${wish.image}" alt="picture not found" onerror="this.src='/img/MyWish-Cloud.png';" style="width: 100%; max-width: 500px; height: auto;">
+            </div>
+            <div>
+                <h1 th:text="${wish.title}"></h1>
+                <h1 th:text="${wish.price} + ' kr.'" style="color: darkcyan"></h1>
+                <h1 th:text="${wish.description}"></h1>
+                <a  th:text="${wish.link} " th:href="${wish.link}" style="font-size: 160%"></a>
+                <br>
+            </div>
         </div>
         <div th:if="${isUser}">
             <form th:action="@{/editWishInWishList}" th:method="get">

@@ -69,7 +69,7 @@ public class WishList {
                     newList.add(wishes.get(i));
                     break;
                 }
-                if(wishes.get(i).price < newList.get(j).price){
+                if(wishes.get(i).getPrice() < newList.get(j).getPrice()){
                     newList.add(j, wishes.get(i));
                     break;
                 }

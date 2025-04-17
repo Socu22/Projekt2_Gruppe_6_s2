@@ -28,6 +28,8 @@ public class WishController {
     @Autowired
     WishRepositoryDataBase repo;
 
+    static int prio = 0;
+
     @GetMapping("/Wish")// change this to connect to a users list somehow
     public String Wish(HttpServletRequest request, @RequestParam("wishId") int wishId,@RequestParam("listId") int listId, Model model){
         HttpSession session = request.getSession(false);
@@ -92,11 +94,22 @@ public class WishController {
 
 
         model.addAttribute("wishList",wishList);
+        model.addAttribute("priority" ,prio);
         assert session != null;
 
 
 
         return "wishList";
+    }
+    @GetMapping("/alphabet")
+    public String alphabet(@RequestParam("id") int listId, @RequestParam("prio") int prio, Model model,HttpServletRequest request){
+        this.prio = prio;
+        return "redirect:WishList?id="+listId;
+    }
+    @GetMapping("/price")
+    public String price(@RequestParam("id") int listId, @RequestParam("prio") int prio, Model model,HttpServletRequest request){
+        this.prio = prio;
+        return "redirect:WishList?id="+listId;
     }
 
     @GetMapping("/getWishInWishList")
