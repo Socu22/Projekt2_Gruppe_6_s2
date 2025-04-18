@@ -1,0 +1,25 @@
+Setup Application:
+1. Press Database icon(looks like a cylinder with layers).
+2. Locate and press the "+" and then go to "data Source".
+3. In "data Source" write mysql and choose it. or scroll down to mysql and choose it.
+4. Insert type of host for the database. if it is a local host do not do anything. if it is for example a microsoft azure mysql insert corresponding link.
+5. insert your own port used for the database, default is 3306. make sure that your port is the right one.
+6. Insert your own "user": username, and "password": password.
+7. if you haven't downloaded the corresponding necessary drivers by pressing the button seccond last. if you have the drivers this won't show.
+8. Copy the link at the button you have to use it later.
+9. Almost in the top middle you should see the "Projekt2Gruppe6S2Application", and the standard button for show more.
+10. Press "Edit Configurations".
+11. Press "Modify options", under "Operations systems" then press "Environment variables"
+12. Locate "Environment variables" and press the paper icon.
+13. Insert 3 names in, this is case sensitive: databaseUrl, databaseUsername, databasePassword.
+14. Insert 3 values. The first is the one you copied from step 8, replace the "/" with this /WishDatabase. The second insert your own username. The second insert your own password.
+15. Go into src->main->ressoruces. run "dbSchemaSetup", if you want dummies run "dbDummySetup".
+16. Make sure that the link from step number 8, has the "/WishDatabase", like the "Environment variables".
+
+
+For the Docker dumdums:
+-mysql (
+1. mkdir ~mysql
+2. $ docker run --name mysqldb -p 3306:3306 -v ~/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 mysql:8.1.0
+)
+
