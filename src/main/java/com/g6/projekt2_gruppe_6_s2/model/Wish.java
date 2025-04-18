@@ -15,6 +15,7 @@ public class Wish{
     String link;
     boolean prioritized;
 
+    // different constructors for if you want to create one with or wihtout title, description, image, price, link and id.
     public Wish(String title, String description, String image, double price, String link, int id) {
         this.title = title;
         this.description = description;
@@ -41,6 +42,7 @@ public class Wish{
     }
     public Wish(double wishPrice, String title, boolean prioritized) {price = wishPrice; this.title = title; this.prioritized = prioritized;}
 
+    //different getters and setters
     public String getWish() {
         return title;
     }

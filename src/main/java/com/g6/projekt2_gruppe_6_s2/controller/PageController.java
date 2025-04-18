@@ -3,6 +3,7 @@ package com.g6.projekt2_gruppe_6_s2.controller;
 import com.g6.projekt2_gruppe_6_s2.repository.UserRepositoryDatabase;
 import com.g6.projekt2_gruppe_6_s2.repository.WishRepositoryDataBase;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,19 +14,30 @@ public class PageController //for pages independent on repos, sessions, and "adv
 {
 
     @GetMapping("/")// This is the homepage
-    public String getIndex(){
+    public String getIndex(HttpServletRequest request, Model model){
+
+        HttpSession session = request.getSession(false);
+        if(session!=null){
+            UserController.getSession(request,model);
+        }
         return "index";
     }
 
     @GetMapping("/Home")// This is the homepage
     public String home(HttpServletRequest request, Model model){
-        UserController.getSession(request, model);
+        HttpSession session = request.getSession(false);
+        if(session!=null){
+            UserController.getSession(request,model);
+        }
         return "index";
     }
 
-    @GetMapping("/AboutUs")// This is the homepage
+    @GetMapping("/AboutUs")// This is the AboutUs
     public String aboutUs(HttpServletRequest request, Model model){
-        UserController.getSession(request, model);
+        HttpSession session = request.getSession(false);
+        if(session!=null){
+            UserController.getSession(request,model);
+        }
         return "aboutUs";
     }
 

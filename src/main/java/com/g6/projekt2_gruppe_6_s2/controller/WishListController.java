@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class WishListController {
     @Autowired
     WishRepositoryDataBase repo;
-
-    @GetMapping("/Profile")// shows wishLists Based on current activeUser
+    // shows wishLists Based on current activeUser, if you're not logged in it shows no wishlists
+    @GetMapping("/Profile")
     public String getIndex(HttpServletRequest request, Model model){
         HttpSession session = request.getSession(false);
         User user = null;
