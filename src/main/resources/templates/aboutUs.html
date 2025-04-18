@@ -11,7 +11,8 @@
   <header th:insert="~{fragments :: header}"></header>
 
   <main>
-    <div class="about-container">
+    <div class="wishlist-container">
+      <div class="wishlist-content">
       <div class="about-card">
         <h2 class="section-title">About MyWish</h2>
         <p class="about-text">
@@ -60,6 +61,8 @@
           </div>
         </div>
       </div>
+    </div>
+      <aside th:insert="~{fragments :: advert}" class="sidebar"></aside>
     </div>
   </main>
 

@@ -249,7 +249,7 @@ main {
   font-weight: 600;
   color: #92400e;
   background: linear-gradient(135deg, #fef3c7, #fde68a);
-  height: 100%;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;

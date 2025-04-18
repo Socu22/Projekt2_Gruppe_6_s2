@@ -44,33 +44,37 @@
   <header th:insert="~{fragments :: header}"></header>
 
   <main>
-    <div  class="wishlist-content">
-      <div class="wish-item" th:each="wishList : ${wishLists}">
-        <form th:action="@{WishList}" th:method="get">
+    <div class="wishlist-container">
+      <div  class="wishlist-content">
+        <h2 class="section-title">My Wishlists</h2>
 
-        <a th:href="@{WishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
+        <div class="wish-item" th:each="wishList : ${wishLists}">
+          <form th:action="@{WishList}" th:method="get">
 
-        <div style="padding: 4%">
+          <a th:href="@{WishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
 
-          <label>WishList: </label>
-          <span th:text="${wishList.getTitle()}"></span>
-        </div>
-        </a>
-        </form>
-      </div>
+          <div style="padding: 4%">
 
-      <div class="wish-item" >
-        <a href="getCreateWishList" style="text-decoration: none; color: inherit;" >
-          <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
-            <img  th:src="@{/img/MyWish-Add.png}" alt="picture not found"  style="height: 12vh;"/>
-
+            <label>WishList: </label>
+            <span th:text="${wishList.getTitle()}"></span>
           </div>
-        </a>
+          </a>
+          </form>
+        </div>
+
+        <div class="wish-item" >
+          <a href="getCreateWishList" style="text-decoration: none; color: inherit;" >
+            <div style="padding: 0%; height: 80%; display: flex; justify-content: center; align-items: center;" >
+              <img  th:src="@{/img/MyWish-Add.png}" alt="picture not found"  style="height: 12vh;"/>
+
+            </div>
+          </a>
+        </div>
       </div>
+
+      <aside th:insert="~{fragments :: advert}" class="sidebar"></aside>
     </div>
   </main>
-
-  <aside th:insert="~{fragments :: advert}"></aside>
 
   <footer th:insert="~{fragments :: footer}"></footer>
 </div>
