@@ -13,7 +13,7 @@
   <main>
     <div class="wishlist-container">
       <div class="wishlist-content">
-        <div class="content-card">
+        <div>
           <h2 class="section-title">Welcome to MyWish</h2>
           <p class="about-text">
             Creating and sharing your wishlist has never been easier! At MyWish, we offer a streamlined,
@@ -22,20 +22,22 @@
           </p>
         </div>
 
-        <div class="content-card">
+        <div>
           <h2 class="section-title">Why Choose Us?</h2>
-          <ul>
-            <li>✔ <strong>Simple & Private</strong> – No unnecessary features, just a clean and intuitive way to build your wishlist.</li>
-            <li>✔ <strong>Easy Sharing</strong> – Send a direct link to friends and family — no accounts required for them to view it.</li>
-            <li>✔ <strong>Full Control</strong> – Create, update, or delete your wishes and wishlists anytime.</li>
-            <li>✔ <strong>No Payments, No Clutter</strong> – Focused purely on adding wishes to a wishlist.</li>
-          </ul>
+          <p>
+            <span>&nbsp;&nbsp;✔&nbsp;&nbsp;<strong>Simple & Private</strong> – No unnecessary features, just a clean and intuitive way to build your wishlist.</span><br>
+            <span>&nbsp;&nbsp;✔&nbsp;&nbsp;<strong>Easy Sharing</strong> – Send a direct link to friends and family — no accounts required for them to view it.</span><br>
+            <span>&nbsp;&nbsp;✔&nbsp;&nbsp;<strong>Full Control</strong> – Create, update, or delete your wishes and wishlists anytime.</span><br>
+            <span>&nbsp;&nbsp;✔&nbsp;&nbsp;<strong>No Payments, No Clutter</strong> – Focused purely on adding wishes to a wishlist.</span>
+          </p>
         </div>
 
-        <div class="content-card">
+        <div>
           <h2 class="section-title">Create an Account</h2>
-          <p>Ready to start building your personal wishlist? Create your free account now by clicking on the link!</p>
-          <a href="login" class="account-btn">Sign Up Here</a>   <!-- jeg har ikke added en class der matcher fordi vi taler om det i morgen -->
+          <p>Ready to start building your personal wishlist? Create your free account now by clicking below!</p>
+          <form th:action="@{/Login}" method="get" style="text-align: center">
+            <input type="submit" value="Register"/>
+          </form>
         </div>
       </div>
 

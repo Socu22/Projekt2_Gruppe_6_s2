@@ -16,7 +16,7 @@ import java.util.Map;
 public class WishRepositoryDataBase {
     @Autowired
     DataSource dataSource;
-
+    //takes a listID and checks the database for all the wishes in that list and adds them in a wishList and returns it
     public ArrayList<Wish> getWishList(int listId) {
         ArrayList<Integer> wishIds = new ArrayList<>();
         ArrayList<Wish> wishList = new ArrayList<>();
@@ -50,7 +50,7 @@ public class WishRepositoryDataBase {
         }
         return wishList;
     }
-
+    //takes a userID and checks in the database for all the wishlists that user has and adds them to a list and returns it.
     public ArrayList<WishList> getWishLists(int userId) {
         ArrayList<WishList> wishLists = new ArrayList<>();
         String sql = "SELECT * FROM listHolders WHERE userId = " + userId + ";";
@@ -70,6 +70,7 @@ public class WishRepositoryDataBase {
         }
         return wishLists;
     }
+    //takes a wishId and finds all the variables for that wish in the database and ads them to a wish and returns it.
     public Wish getWish(int wishId) {
         Wish wish = new Wish();
         String sql = "SELECT * FROM wishes WHERE wishId = " + wishId + ";";
@@ -88,6 +89,7 @@ public class WishRepositoryDataBase {
         }
         return wish;
     }
+    //takes a userid and a listid and checks if the list is owned by the user in the database, if it is it returns true, else false
     public boolean userOwnsList(int userId, int listId) {
         String sql = "SELECT * FROM listHolders WHERE listId = " + listId + ";";
         try (Connection connection = dataSource.getConnection();

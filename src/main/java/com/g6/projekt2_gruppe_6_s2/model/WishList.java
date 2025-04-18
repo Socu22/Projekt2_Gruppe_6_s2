@@ -13,7 +13,7 @@ public class WishList {
 
 
     ArrayList<Wish> wishes = new ArrayList<>();
-
+    //just for testing
     public static void main(String[] args) {
         WishList wl = new WishList();
         wl.wishes.add(new Wish(600, "basd", true));
@@ -36,7 +36,7 @@ public class WishList {
         }
 
     }
-
+    // different constructors for if you want to create one with or wihtout title, wishes and id
     public WishList(String title, int listId, ArrayList<Wish> wishes) {
         this.title = title;
         this.listId = listId;
@@ -49,10 +49,11 @@ public class WishList {
     public WishList() {
 
     }
-
+    // returns the list as it is
     public ArrayList<Wish> getList(){
         return wishes;
     }
+    // orders the list alpahbetically and returns it
     public ArrayList<Wish> getAlphabeticalList() {
         ArrayList<Wish> newList = wishes;
 
@@ -61,6 +62,7 @@ public class WishList {
 
         return newList;
     }
+    // orders the list by price and returns it
     public ArrayList<Wish> getListByPrice(){
         ArrayList<Wish> newList = new ArrayList<>();
         for (int i = 0; i < wishes.size() ; i++){
@@ -77,6 +79,7 @@ public class WishList {
         }
         return newList;
     }
+    // orders the list by priority, prioritized first, then not prioritized, returns the list
     public ArrayList<Wish> getListByPreference(){
         ArrayList<Wish> newList = getAlphabeticalList();
         ArrayList<Wish> pList = new ArrayList<>();

@@ -27,8 +27,10 @@ public class WishController {
     @Autowired
     WishRepositoryDataBase repo;
 
+    //to see wich priority the wishes should be shown in, 0 is alpabetical, 1 is price
     static int prio = 0;
 
+    //Getmappingen for a wish, takes a wishID and listId from wishlist html so it can find the wish in the database
     @GetMapping("/Wish")// change this to connect to a users list somehow
     public String Wish(HttpServletRequest request, @RequestParam("wishId") int wishId,@RequestParam("listId") int listId, Model model){
         HttpSession session = request.getSession(false);
@@ -51,6 +53,7 @@ public class WishController {
         model.addAttribute("wish",wish);
         return "showWish";
     }
+    //when you press the deletebutton in the showWish html you get send here, it deletes the wish and redirects you to the wislist you were just in
     @GetMapping("/removeWish")
     public String removeWish(HttpServletRequest request, Model model) throws SQLException {
         HttpSession session = request.getSession(false);
@@ -101,11 +104,13 @@ public class WishController {
 
         return "wishList";
     }
+    //if you press the alpahebtical button in wishList html, you get send here, the prio changes and it redirects you back
     @GetMapping("/alphabet")
     public String alphabet(@RequestParam("id") int listId, @RequestParam("prio") int prio, Model model,HttpServletRequest request){
         this.prio = prio;
         return "redirect:WishList?id="+listId;
     }
+    //if you press the price button in wishList html, you get send here, the prio changes and it redirects you back
     @GetMapping("/price")
     public String price(@RequestParam("id") int listId, @RequestParam("prio") int prio, Model model,HttpServletRequest request){
         this.prio = prio;
@@ -153,6 +158,7 @@ public class WishController {
 
         return "redirect:/WishList?id="+lastActiveListId;
     }
+    // if you're owner of list and click the edit button on the showWish html you get here, it makes a new wish and then puts than on the wishlist and removes the old
     @GetMapping("/editWishInWishList")
     public String editWishInWishList(
             HttpServletRequest request,Model model,

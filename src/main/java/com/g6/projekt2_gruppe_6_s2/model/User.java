@@ -6,6 +6,7 @@ public class User {
     String password;
     String imgPath;
 
+    //just a constructor
     public User(int id, String username, String password, String imgPath) {
         this.id = id;
         this.username = username;
@@ -15,7 +16,7 @@ public class User {
 
     public User() {
     }
-
+    //different getters and setters
     public int getId() {
         return id;
     }
