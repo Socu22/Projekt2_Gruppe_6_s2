@@ -61,6 +61,7 @@ public class WishController {
             int _id2 = (int) session.getAttribute("id2");
             lastActiveListId = (int) session.getAttribute("lastActiveWishList");
             repo.removeWishFromWishlist(_id2);
+            UserController.getSession(request,model);
         }
         assert session != null;
 
@@ -113,6 +114,11 @@ public class WishController {
 
     @GetMapping("/getWishInWishList")
     public String getWishInWishList(Model model,HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session!=null){
+            UserController.getSession(request,model);
+        }
+
         return "createWishInWishList";
     }
     @GetMapping("/saveWishInWishList")

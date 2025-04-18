@@ -53,7 +53,11 @@ public class WishListController {
 
 
     @GetMapping("/getCreateWishList")
-    public String getCreateWishList() {
+    public String getCreateWishList(Model model,HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session!=null){
+            UserController.getSession(request,model);
+        }
         return "createWishList";
     }
 
