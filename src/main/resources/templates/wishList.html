@@ -38,7 +38,10 @@
     background-color: #f0f0f0;
   }
 </style>
-
+<!--
+for each wish in the wishlist it creates a box with the wishs image, title, description, link and price
+in the top it also checks if you're logged in and shows the url that u can send to others if you are
+-->
 <body>
 <div class="container">
   <header th:insert="~{fragments :: header}"></header>
@@ -49,7 +52,7 @@
       <a th:href="${URL}" th:text="${URL}"></a>
     </div>
 
-    <div th:if="${isLoggedIn}">
+    <div th:if="${isUser}">
       <form th:action="@{/deleteWishList}" method="get">
         <button type="submit">Delete Wishlist</button>
       </form>
