@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyWish</title>
   <link rel="stylesheet" th:href="@{style.css}">
+  <style>
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    .form-group button {
+      padding: 10px 15px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-inline: 1rem;
+    }
+    .form-group button:hover {
+      background-color: #0060b0;
+    }
+    .message {
+      margin-top: 20px;
+      color: green;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
@@ -36,20 +66,14 @@
           <h2 class="section-title">Create an Account</h2>
           <p>Ready to start building your personal wishlist? Create your free account now by clicking below!</p>
           <form th:action="@{/Login}" method="get" style="text-align: center">
-            <input type="submit" value="Register"/>
+            <div class="form-group">
+              <button type="submit">Register</button>
+            </div>
           </form>
         </div>
       </div>
 
-      <div class="sidebar">
-        <div class="sidebar-card ad-container">
-          <div class="ad-content">
-            <p>Premium Features?</p>
-            <p></p>
-            <p>marketing?</p>
-          </div>
-        </div>
-      </div>
+      <aside th:insert="~{fragments :: advert}" class="sidebar"></aside>
 
     </div>
   </main>

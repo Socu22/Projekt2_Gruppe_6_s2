@@ -7,19 +7,13 @@ import com.g6.projekt2_gruppe_6_s2.repository.WishRepositoryDataBase;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class WishController {
@@ -129,7 +123,7 @@ public class WishController {
     @GetMapping("/saveWishInWishList")
     public String postWishInWishList(
             HttpServletRequest request,Model model,
-            @RequestParam("price")double price,
+            @RequestParam("price") String price,
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("link") String link,
@@ -148,9 +142,19 @@ public class WishController {
 
         System.out.println("in postWishInWishList"+_id);
 
+        double priceD;
+
+        try
+        {
+            priceD = Double.parseDouble(price);
+        }
+        catch (NumberFormatException e)
+        {
+            priceD = .0;
+        }
 
         ArrayList<Wish> wishList = new ArrayList<>();
-        wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
+        wishList.add(new Wish(title,description,img,priceD,link, repo.getNextWishId()));
         WishList wishListInstance = new WishList(title,_id,wishList);
         repo.saveWishlist(user.getId(), _id,wishListInstance);
 

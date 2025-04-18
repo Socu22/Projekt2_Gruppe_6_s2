@@ -1,6 +1,6 @@
 :root {
   --primary-color: #0081fd;
-  --secondary-color: #0081fd;
+  --secondary-color: #0060b0;
   --background-light: #ffffff;
   --text-color: #3f3f3f;
   --light-text: #666666;
@@ -249,7 +249,7 @@ main {
   font-weight: 600;
   color: #92400e;
   background: linear-gradient(135deg, #fef3c7, #fde68a);
-  height: 100%;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;

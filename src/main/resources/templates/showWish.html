@@ -5,57 +5,108 @@
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{style.css}">
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-inline: 1rem;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        .form-group-delete button {
+            padding: 10px 15px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-group-delete button:hover {
+            background-color: #b00000;
+        }
+        .message {
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
 </head>
+<!--
+if you arent the user it shows image title and so on as normal
+if you are the user it instead shows inputfields where u can change all the variables as you'd like
+-->
 <body>
 <div class="container">
     <header th:insert="~{fragments :: header}"></header>
 
     <main>
-        <div th:unless="${isUser}" style="display: flex; align-items: flex-start; gap: 30px;">
-            <div>
-                <img th:src="${wish.image}" alt="picture not found" onerror="this.src='/img/MyWish-Cloud.png';" style="width: 100%; max-width: 500px; height: auto;">
+        <div class="wishlist-container">
+            <div class="wishlist-content">
+                <div th:unless="${isUser}" style="display: flex; align-items: flex-start; gap: 30px;">
+                    <div>
+                        <img th:src="${wish.image}" alt="picture not found" onerror="this.src='/img/MyWish-Cloud.png';" style="width: 100%; max-width: 500px; height: auto;">
+                    </div>
+                    <div>
+                        <h1 th:text="${wish.title}" class="section-title" style="font-size: 180%"></h1>
+                        <h1 th:text="${wish.price} + ' kr.'" style="color: darkcyan"></h1>
+                        <p th:text="${wish.description}"></p>
+                        <a  th:text="${wish.link} " th:href="${wish.link}" style="font-size: 160%"></a>
+                        <br>
+                    </div>
+                </div>
+                <div th:if="${isUser}">
+                    <form th:action="@{/editWishInWishList}" th:method="get">
+                        <input hidden type="number" name="listId" th:value="${listId}"  />
+                        <input hidden type="number" name="wishId" th:value="${wish.id}"  />
+                        <div class="form-group">
+                            <label for="title">Wish Title:</label>
+                            <input type="text" id="title" name="title" th:value="${wish.title}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <input type="text" id="description" name="description" th:value="${wish.description}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price:</label>
+                            <input type="number" id="price" name="price" step="0.01" th:value="${wish.price}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="link">Link:</label>
+                            <input type="url" id="link" name="link" th:value="${wish.link}">
+                        </div>
+                        <div class="form-group">
+                            <label for="img">Image URL:</label>
+                            <input type="url" id="img" name="img" th:value="${wish.image}" >
+                        </div>
+                        <div class="form-group" style="display: inline-flex">
+                            <button type="submit">Edit Wish</button>
+                            <form th:action="@{/removeWish}" th:method="get">
+                                <div class="form-group-delete">
+                                    <button type="submit">Delete Wish</button>
+                                </div>
+                            </form>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div>
-                <h1 th:text="${wish.title}"></h1>
-                <h1 th:text="${wish.price} + ' kr.'" style="color: darkcyan"></h1>
-                <h1 th:text="${wish.description}"></h1>
-                <a  th:text="${wish.link} " th:href="${wish.link}" style="font-size: 160%"></a>
-                <br>
-            </div>
-        </div>
-        <div th:if="${isUser}">
-            <form th:action="@{/editWishInWishList}" th:method="get">
-                <input hidden type="number" name="listId" th:value="${listId}"  />
-                <input hidden type="number" name="wishId" th:value="${wish.id}"  />
-                <div class="form-group">
-                    <label for="title">Wish Title:</label>
-                    <input type="text" id="title" name="title" th:value="${wish.title}" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <input type="text" id="description" name="description" th:value="${wish.description}" required>
-                </div>
-                <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input type="number" id="price" name="price" step="0.01" th:value="${wish.price}" required>
-                </div>
-                <div class="form-group">
-                    <label for="link">Link:</label>
-                    <input type="url" id="link" name="link" th:value="${wish.link}">
-                </div>
-                <div class="form-group">
-                    <label for="img">Image URL:</label>
-                    <input type="url" id="img" name="img" th:value="${wish.image}" >
-                </div>
-                <div class="form-group">
-                    <button type="submit">Edit Wish</button>
-                </div>
-            </form>
-            <form th:action="@{/removeWish}" th:method="get">
-                <div class="form-group">
-                    <button type="submit">Delete Wish</button>
-                </div>
-            </form>
+
+            <aside th:insert="~{fragments :: advert}" class="sidebar"></aside>
         </div>
     </main>
 

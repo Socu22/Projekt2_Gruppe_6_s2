@@ -6,17 +6,6 @@
     <title>Add Wish to Wishlist</title>
     <link rel="stylesheet" th:href="@{style.css}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-        }
-        .container {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
         .form-group {
             margin-bottom: 15px;
         }
@@ -36,6 +25,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-inline: 1rem;
         }
         .form-group button:hover {
             background-color: #45a049;
@@ -52,33 +42,36 @@
     <header th:insert="~{fragments :: header}"></header>
 
     <main>
-        <h2>Add Wish to Wishlist</h2>
-        <form th:action="@{/saveWishInWishList(id=${id})}" th:method="get">
+        <div class="wishlist-content">
+            <h2 class="section-title">Add Wish to Wishlist</h2>
+            <form th:action="@{/saveWishInWishList(id=${id})}" th:method="get">
 
-            <div class="form-group">
-                <label for="title">Wish Title:</label>
-                <input type="text" id="title" name="title" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" id="description" name="description" required>
-            </div>
-            <div class="form-group">
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label for="link">Link:</label>
-                <input type="url" id="link" name="link">
-            </div>
-            <div class="form-group">
-                <label for="img">Image URL:</label>
-                <input type="url" id="img" name="img" >
-            </div>
-            <div class="form-group">
-                <button type="submit">Add Wish</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="title">Wish Title:</label>
+                    <input type="text" id="title" name="title" placeholder="(required)" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" placeholder="(optional)">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="price" placeholder="(optional)">
+                    <!-- <input type="number" id="price" name="price" step="0.01"> -->
+                </div>
+                <div class="form-group">
+                    <label for="link">Store Link:</label>
+                    <input type="url" id="link" name="link" placeholder="(optional) eg https/www.ProductStore.com/product">
+                </div>
+                <div class="form-group">
+                    <label for="img">Image Link:</label>
+                    <input type="url" id="img" name="img" placeholder="(optional) eg https/www.ProductStore.com/product/img.webp">
+                </div>
+                <div class="form-group">
+                    <button type="submit">Add Wish</button>
+                </div>
+            </form>
+        </div>
     </main>
 
     <footer th:insert="~{fragments :: footer}"></footer>
