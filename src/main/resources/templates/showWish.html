@@ -5,6 +5,47 @@
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{style.css}">
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-inline: 1rem;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        .form-group-delete button {
+            padding: 10px 15px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-group-delete button:hover {
+            background-color: #b00000;
+        }
+        .message {
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
 </head>
 <!--
 if you arent the user it shows image title and so on as normal
@@ -53,13 +94,13 @@ if you are the user it instead shows inputfields where u can change all the vari
                             <label for="img">Image URL:</label>
                             <input type="url" id="img" name="img" th:value="${wish.image}" >
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="display: inline-flex">
                             <button type="submit">Edit Wish</button>
-                        </div>
-                    </form>
-                    <form th:action="@{/removeWish}" th:method="get">
-                        <div class="form-group">
-                            <button type="submit">Delete Wish</button>
+                            <form th:action="@{/removeWish}" th:method="get">
+                                <div class="form-group-delete">
+                                    <button type="submit">Delete Wish</button>
+                                </div>
+                            </form>
                         </div>
                     </form>
                 </div>

@@ -123,7 +123,7 @@ public class WishController {
     @GetMapping("/saveWishInWishList")
     public String postWishInWishList(
             HttpServletRequest request,Model model,
-            @RequestParam("price")double price,
+            @RequestParam("price") String price,
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("link") String link,
@@ -142,9 +142,19 @@ public class WishController {
 
         System.out.println("in postWishInWishList"+_id);
 
+        double priceD;
+
+        try
+        {
+            priceD = Double.parseDouble(price);
+        }
+        catch (NumberFormatException e)
+        {
+            priceD = .0;
+        }
 
         ArrayList<Wish> wishList = new ArrayList<>();
-        wishList.add(new Wish(title,description,img,price,link, repo.getNextWishId()));
+        wishList.add(new Wish(title,description,img,priceD,link, repo.getNextWishId()));
         WishList wishListInstance = new WishList(title,_id,wishList);
         repo.saveWishlist(user.getId(), _id,wishListInstance);
 

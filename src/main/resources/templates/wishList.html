@@ -37,6 +37,45 @@
   .square:hover {
     background-color: #f0f0f0;
   }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  .form-group button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-inline: 1rem;
+  }
+  .form-group button:hover {
+    background-color: #45a049;
+  }
+  .form-group-delete button {
+    padding: 10px 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .form-group-delete button:hover {
+    background-color: #b00000;
+  }
+  .message {
+    margin-top: 20px;
+    color: green;
+  }
 </style>
 <!--
 for each wish in the wishlist it creates a box with the wishs image, title, description, link and price
@@ -48,86 +87,99 @@ there is also a dropdown that shows alphabet and price buttons, that redirects y
   <header th:insert="~{fragments :: header}"></header>
 
   <main>
-    <div th:if="${isLoggedIn}">
-      <span>Send Wishlist To Others(Right click on the link, copy it and send to others): </span>
-      <a th:href="${URL}" th:text="${URL}"></a>
-    </div>
-
-    <div th:if="${isUser}">
-      <form th:action="@{/deleteWishList}" method="get">
-        <button type="submit">Delete Wishlist</button>
-      </form>
-    </div>
-    <details >
-      <summary th:if="${priority == 0}">Alphabetic</summary>
-      <summary th:if="${priority == 1}">Price</summary>
-      <form th:action="@{/alphabet}" th:method="get">
-        <input hidden type="number" name="id" th:value="${wishList.getListId()}">
-        <input hidden type="number" name="prio" th:value="0">
-        <button type="submit">Alphabetic</button>
-      </form>
-      <form th:action="@{/price}" th:method="get">
-        <input hidden type="number" name="id" th:value="${wishList.getListId()}">
-        <input hidden type="number" name="prio" th:value="1">
-        <button type="submit">Price</button>
-      </form>
-    </details>
-
     <div class="wishlist-container">
-    <div class="wishlist-content">
-      <div th:if="${priority == 0}">
-        <div class="square" th:each="wish : ${wishList.getAlphabeticalList()}">
-          <form th:action="@{Wish}" th:method="get">
-            <a th:href="@{Wish(wishId=${wish.id}, listId = ${wishList.listId})}" style="text-decoration: none; color: inherit;" >
-              <div style="padding: 4%;">
-                <img  th:src="${wish.image}" alt="image not found" onerror="this.src='/img/MyWish-Cloud.png';" />
-                <div style="width: max(4cm)">
-                  <span th:text="${wish.title}"  ></span>
-                  <span th:text="${wish.link}" ></span>
-                  <br>
-                  <span th:text="${wish.price}" > </span>
-                  <span> kr.</span>
-                  <br>
-                  <span th:text="${wish.description}" ></span>
-                </div>
-
+      <div style="margin: 0">
+        <div class="wishlist-content" style="background-color: var(--primary-color); margin-bottom: 1rem;">
+          <div>
+            <div th:if="${isLoggedIn}" style="width: 100%; display: inline-flex; justify-content: space-between">
+              <div style="color: white; margin-bottom: 1rem;">
+                <span>Share your wishlist with others by sending them this link: </span><br>
+                <a th:href="${URL}" th:text="${URL}" style="margin-left: 1rem"></a>
               </div>
-            </a>
-          </form>
-        </div>
-      </div>
-      <div th:if="${priority == 1}">
-        <div class="square" th:each="wish : ${wishList.getListByPrice()}">
-          <form th:action="@{Wish}" th:method="get">
-            <a th:href="@{Wish(wishId=${wish.id}, listId = ${wishList.listId})}" style="text-decoration: none; color: inherit;" >
-              <div style="padding: 4%;">
-                <img  th:src="${wish.image}" alt="image not found" onerror="this.src='/img/MyWish-Cloud.png';" />
-                <div style="width: max(4cm)">
-                  <span th:text="${wish.title}"  ></span>
-                  <span th:text="${wish.link}" ></span>
-                  <br>
-                  <span th:text="${wish.price}" > </span>
-                  <span> kr.</span>
-                  <br>
-                  <span th:text="${wish.description}" ></span>
-                </div>
-
+              <div style="display: inline-flex">
+                <form th:action="@{/deleteWishList}" method="get">
+                  <div class="form-group-delete">
+                    <button type="submit">Delete Wishlist</button>
+                  </div>
+                </form>
               </div>
-            </a>
-          </form>
-        </div>
-      </div>
-
-      <div class="square" th:if="${isUser }" >
-        <a th:href="@{getWishInWishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
-          <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
-            <img  th:src="@{/img/MyWish-Add.png}" alt="picture not found"  />
-
+            </div>
           </div>
-        </a>
-      </div>
-    </div>
+          <span style="color: white">Sort by:</span>
+          <details style="display: inline-flex; color: white">
+            <summary th:if="${priority == 0}">Alphabetic</summary>
+            <summary th:if="${priority == 1}">Price</summary>
+            <form th:action="@{/alphabet}" th:method="get" style="display: inline-flex; margin-left: .5rem">
+              <input hidden type="number" name="id" th:value="${wishList.getListId()}">
+              <input hidden type="number" name="prio" th:value="0">
+              <button type="submit">Alphabetic</button>
+            </form>
+            <form th:action="@{/price}" th:method="get" style="display: inline-flex">
+              <input hidden type="number" name="id" th:value="${wishList.getListId()}">
+              <input hidden type="number" name="prio" th:value="1">
+              <button type="submit">Price</button>
+            </form>
+          </details>
+        </div>
 
+        <div class="wishlist-content">
+          <div th:if="${priority == 0}">
+            <div class="square" th:each="wish : ${wishList.getAlphabeticalList()}">
+              <form th:action="@{Wish}" th:method="get">
+                <a th:href="@{Wish(wishId=${wish.id}, listId = ${wishList.listId})}" style="text-decoration: none; color: inherit;" >
+                  <div style="padding: 4%;">
+                    <img  th:src="${wish.image}" alt="image not found" onerror="this.src='/img/MyWish-Cloud.png';" />
+                    <div style="width: max(4cm)">
+                      <span th:text="${wish.title}"  ></span>
+                      <span th:text="${wish.link}" ></span>
+                      <br>
+                      <span th:text="${wish.price}" > </span>
+                      <span> kr.</span>
+                      <br>
+                      <span th:text="${wish.description}" ></span>
+                    </div>
+                  </div>
+                </a>
+              </form>
+            </div>
+            <div class="square" th:if="${isUser }">
+              <a th:href="@{getWishInWishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
+                <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
+                  <img  th:src="@{/img/MyWish-Add.png}" alt="picture not found"  />
+                </div>
+              </a>
+            </div>
+          </div>
+          <div th:if="${priority == 1}">
+            <div class="square" th:each="wish : ${wishList.getListByPrice()}">
+              <form th:action="@{Wish}" th:method="get">
+                <a th:href="@{Wish(wishId=${wish.id}, listId = ${wishList.listId})}" style="text-decoration: none; color: inherit;" >
+                  <div style="padding: 4%;">
+                    <img  th:src="${wish.image}" alt="image not found" onerror="this.src='/img/MyWish-Cloud.png';" />
+                    <div style="width: max(4cm)">
+                      <span th:text="${wish.title}"  ></span>
+                      <span th:text="${wish.link}" ></span>
+                      <br>
+                      <span th:text="${wish.price}" > </span>
+                      <span> kr.</span>
+                      <br>
+                      <span th:text="${wish.description}" ></span>
+                    </div>
+
+                  </div>
+                </a>
+              </form>
+            </div>
+            <div class="square" th:if="${isUser }">
+              <a th:href="@{getWishInWishList(id=${wishList.listId})}" style="text-decoration: none; color: inherit;" >
+                <div style="padding: 4%; height: 100%; display: flex; justify-content: center; align-items: center;" >
+                  <img  th:src="@{/img/MyWish-Add.png}" alt="picture not found"  />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       <aside th:insert="~{fragments :: advert}" class="sidebar"></aside>
     </div>
   </main>
