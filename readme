@@ -17,7 +17,7 @@ Setup Application:
 16. Make sure that the link from step number 8, has the "/WishDatabase", like the "Environment variables".
 
 
-For the Docker dumdums:
+Tutorial docker mysql Image for powershell:
 -mysql (
 1. mkdir ~mysql
 2. $ docker run --name mysqldb -p 3306:3306 -v ~/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 mysql:8.1.0
