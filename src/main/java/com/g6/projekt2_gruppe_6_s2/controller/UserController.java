@@ -18,23 +18,26 @@ import java.time.LocalDateTime;
 public class UserController
 {
     @Autowired
-    UserRepositoryDatabase userRepo;
+    UserRepositoryDatabase userRepo; // repository connecting to database
 
-    @GetMapping("/Login")
+    @GetMapping("/Login") // action when user requests to login/register page
     public String login(HttpServletRequest request, Model model)
     {
+        // if user is already in a valid session, ie logged in, direct to their profile page instead
         if (getSession(request, model) != null) return "redirect:/Profile";
         return "login";
     }
 
-    @GetMapping("/Logout")
+    @GetMapping("/Logout") // action when user requests to logout
     public String logout(HttpServletRequest request)
     {
-        request.getSession().invalidate();
-        return "index";
+        // action should not be available if valid session does not exist,
+        // still, calling 'getSession' without false argument, ensures 'invalidate' is not called on 'null'
+        request.getSession().invalidate(); // invalidates the user's session.
+        return "index"; // send user to homepage, without 'redirect/Home' as session does assuredly not exist
     }
 
-    @PostMapping("/VerifyLogin")
+    @PostMapping("/VerifyLogin") // action when user submits credentials to login
     public String verify(@RequestParam("username")  String username,
                          @RequestParam("password")  String password,
                          HttpServletRequest request,
@@ -42,22 +45,25 @@ public class UserController
     {
         try
         {
-            User user = userRepo.getUser(username, password);
+            User user = userRepo.getUser(username, password); // fetch corresponding user from database
 
-            if (user != null) // TODO: redundant 'if'?
+            if (user != null) // TODO: redundant 'if'? repo throws anyway in the case no such user exists or password is wrong
             {
-                setSession(user, request, model);
+                setSession(user, request, model); // registers user in a valid session
 
+                // print log message behind the scenes
                 System.out.println(LocalDateTime.now() + "\u001B[32m  LOGN\u001B[35m user\u001B[0m ---- [" + username + "]");
 
-                return "redirect:/Profile";
+                return "redirect:/Profile"; // redirect user to their profile page
             }
             model.addAttribute("registerMsg", "An unknown Error has occurred."); // should NEVER happen
         }
         catch (SQLException|IllegalArgumentException e)
         {
+            // catches potential exceptions from repo, these should be formulated fittingly to display for user.
+            // print log message behind the scenes
             System.out.println(LocalDateTime.now() + "\u001B[32m  LOGN\u001B[35m fail\u001B[0m ---- [" + username + "]");
-            model.addAttribute("loginMsg", e.getMessage());
+            model.addAttribute("loginMsg", e.getMessage()); // display fault to user
         }
 
         return "login"; // Return to the login page with an error message
@@ -74,15 +80,16 @@ public class UserController
         {
             if (!password.equals(password2)) throw new IllegalArgumentException("Passwords do not match.");
 
-            if (delete(username, password, model))
+            if (delete(username, password, model)) // remove user from database if already exists and correct passwords
             {
                 System.out.println(LocalDateTime.now() + "\u001B[32m  DELT\u001B[35m user\u001B[0m ---- [" + username + "]");
-                return "login";
+                return "login"; // returns user to login page
             }
 
-            User user = userRepo.addUser(username, password);
+            User user = userRepo.addUser(username, password); // adds user to database if not already exists and correct passwords
 
-            if (user != null) // TODO: redundant 'if'?
+            // login user
+            if (user != null) // TODO: redundant 'if'? repo throws anyway in the case no such user exists or password is wrong
             {
                 setSession(user, request, model);
 
@@ -94,6 +101,9 @@ public class UserController
         }
         catch (SQLException|IllegalArgumentException e)
         {
+            // catches potential exceptions from repo/non-matching passwords,
+            // these should be formulated fittingly to display for user.
+            // print log message behind the scenes
             System.out.println(LocalDateTime.now() + "\u001B[32m  RGST\u001B[35m fail\u001B[0m ---- [" + username + "]");
             model.addAttribute("registerMsg", e.getMessage());
         }
