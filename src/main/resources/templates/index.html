@@ -4,8 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyWish</title>
+
+  <!-- Link to main stylesheet -->
   <link rel="stylesheet" th:href="@{style.css}">
+
   <style>
+    /* Basic form styling */
     .form-group {
       margin-bottom: 15px;
     }
@@ -30,19 +34,20 @@
     .form-group button:hover {
       background-color: #0060b0;
     }
-    .message {
-      margin-top: 20px;
-      color: green;
-    }
   </style>
 </head>
 <body>
 <div class="container">
+
+  <!-- From Fragments -->
   <header th:insert="~{fragments :: header}"></header>
 
   <main>
     <div class="wishlist-container">
+
       <div class="wishlist-content">
+
+        <!-- Welcome section -->
         <div>
           <h2 class="section-title">Welcome to MyWish</h2>
           <p class="about-text">
@@ -62,9 +67,12 @@
           </p>
         </div>
 
+        <!-- Account registration section -->
         <div>
           <h2 class="section-title">Create an Account</h2>
           <p>Ready to start building your personal wishlist? Create your free account now by clicking below!</p>
+
+          <!-- Redirect to registration/login page with thymeleaf -->
           <form th:action="@{/Login}" method="get" style="text-align: center">
             <div class="form-group">
               <button type="submit">Register</button>
@@ -73,12 +81,15 @@
         </div>
       </div>
 
+      <!-- From Fragments -->
       <aside th:insert="~{fragments :: advert}" class="sidebar"></aside>
 
     </div>
   </main>
 
+  <!-- From Fragments -->
   <footer th:insert="~{fragments :: footer}"></footer>
+
 </div>
 </body>
 </html>

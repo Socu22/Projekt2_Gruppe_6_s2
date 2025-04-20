@@ -1,4 +1,5 @@
 :root {
+  /* Define reusable color, shadow, and radius variables for consistent styling */
   --primary-color: #0081fd;
   --secondary-color: #0060b0;
   --background-light: #ffffff;
@@ -12,6 +13,7 @@
 }
 
 body {
+  /* Set base font, colors, and layout for the entire page */
   font-family: 'Segoe UI', system-ui, sans-serif;
   line-height: 1.5;
   color: var(--text-color);
@@ -24,23 +26,27 @@ body {
 }
 
 .container {
+  /* Fixed width and padding */
   max-width: 1200px;
   min-width: 800px;
   padding: 20px;
   align-self: center;
 }
 
-.container header{
+.container header {
+  /* Make the header stick to the top */
   position: sticky;
-  top:0;
+  top: 0;
 }
 
-.container footer{
+.container footer {
+  /* Make the footer stick to the bottom */
   position: sticky;
-  bottom:0;
+  bottom: 0;
 }
 
-.container main{
+.container main {
+  /* layout for main content */
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
@@ -48,6 +54,7 @@ body {
 }
 
 .app-header {
+  /* Style for top navigation/header */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,6 +68,7 @@ body {
 }
 
 .simple-footer {
+  /* Main footer style */
   background-color: var(--primary-color);
   color: white;
   width: 100%;
@@ -73,6 +81,7 @@ body {
 }
 
 .bookend {
+  /* Shared top/bottom content */
   background-color: var(--primary-color);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
@@ -84,10 +93,12 @@ body {
 }
 
 .bookend div {
+  /* Center content */
   align-items: center;
 }
 
 .bookend a {
+  /* Style links */
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -95,16 +106,19 @@ body {
 }
 
 .bookend a:hover {
+  /* Hover effect for links */
   opacity: 0.8;
   text-decoration: underline;
 }
 
 .logo {
+  /* Logo size and style */
   height: 12vh;
   border-radius: var(--radius-md);
 }
 
 .app-title {
+  /* Main title in the header */
   font-size: 1.5rem;
   font-weight: 700;
   color: white;
@@ -113,12 +127,14 @@ body {
 }
 
 .main-nav {
+  /* Navigation container */
   display: flex;
   gap: 3rem;
   padding-right: 20px;
 }
 
 .nav-link {
+  /* Style for nav links */
   text-decoration: none;
   color: white;
   font-weight: 500;
@@ -129,6 +145,7 @@ body {
 }
 
 .nav-link:hover {
+  /* Hover animation for nav links */
   color: white;
   transform: translateY(-2px) scale(1.05);
   opacity: 1;
@@ -136,12 +153,14 @@ body {
 }
 
 .nav-link.active {
+  /* Active nav link style */
   color: white;
   opacity: 1;
   font-weight: 600;
 }
 
 .nav-link.active::after {
+  /* Underline effect for active nav link */
   content: '';
   position: absolute;
   bottom: 0;
@@ -153,11 +172,13 @@ body {
 }
 
 main {
+  /* Main content spacing */
   padding: 2rem 0;
   flex-grow: 1;
 }
 
 .wishlist-container {
+  /* Layout for wishlist */
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
@@ -165,12 +186,14 @@ main {
 }
 
 @media (min-width: 992px) {
+  /* Change wishlist layout on larger screens */
   .wishlist-container {
     grid-template-columns: 3fr 1fr;
   }
 }
 
 .wishlist-content, .sidebar-card, .ad-container {
+  /* Shared box style for content blocks */
   background: var(--background-light);
   border-radius: var(--radius-md);
   padding: 1.5rem;
@@ -178,12 +201,14 @@ main {
 }
 
 .section-title {
+  /* Style for section titles */
   font-size: 1.25rem;
   margin: 0 0 1.5rem;
   color: var(--primary-color);
 }
 
 .wish-category {
+  /* Sub-section title style */
   font-weight: 600;
   margin-bottom: 1rem;
   color: var(--secondary-color);
@@ -191,6 +216,7 @@ main {
 }
 
 .wish-item {
+  /* Wish item style */
   background: var(--background-light);
   border-radius: var(--radius-sm);
   padding: 1rem;
@@ -200,36 +226,42 @@ main {
 }
 
 .wish-checkbox {
+  /* Checkbox layout */
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
 .wish-checkbox input[type="checkbox"] {
+  /* Checkbox style */
   width: 1.1rem;
   height: 1.1rem;
   accent-color: var(--primary-color);
 }
 
 .sidebar {
+  /* Sidebar layout */
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
 .share-title {
+  /* Title above sharing options */
   font-weight: 600;
   margin-bottom: 1rem;
   font-size: 1.1rem;
 }
 
 .share-options {
+  /* Layout for social/share buttons */
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
 
 .share-btn {
+  /* Button style for sharing */
   padding: 0.5rem 1rem;
   background: var(--primary-color);
   color: white;
@@ -241,10 +273,12 @@ main {
 }
 
 .share-btn:hover {
+  /* Hover effect for share buttons */
   background: var(--secondary-color);
 }
 
 .ad-container {
+  /* Advertisement style */
   text-align: center;
   font-weight: 600;
   color: #92400e;
@@ -256,10 +290,12 @@ main {
 }
 
 .footer-content {
+  /* Center footer text */
   text-align: center;
 }
 
 .footer-contact {
+  /* Layout for contact info */
   display: flex;
   justify-content: center;
   gap: 2rem;
@@ -268,6 +304,7 @@ main {
 }
 
 .footer-contact p {
+  /* Contact layout */
   margin: 0;
   display: flex;
   align-items: center;
@@ -275,6 +312,7 @@ main {
 }
 
 .simple-footer a {
+  /* Link in footer */
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -282,11 +320,13 @@ main {
 }
 
 .simple-footer a:hover {
+  /* Hover effect for footer link */
   opacity: 0.8;
   text-decoration: underline;
 }
 
 .copyright {
+  /* Copyright text style */
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.5rem;
   margin-top: 1rem;

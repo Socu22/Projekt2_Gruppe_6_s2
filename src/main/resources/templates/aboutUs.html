@@ -4,69 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - MyWish</title>
+
+  <!-- Link to CSS file with thymeleaf -->
   <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
 <div class="container">
+
+  <!-- From Fragments -->
   <header th:insert="~{fragments :: header}"></header>
 
   <main>
     <div class="wishlist-container">
+
       <div class="wishlist-content">
-      <div class="about-card">
-        <h2 class="section-title">About MyWish</h2>
-        <p class="about-text">
-          MyWish is a simple yet powerful wishlist manager designed to help you organize and track your wishes
-          for any occasion. Whether it's for birthdays, holidays, or just everyday desires, MyWish makes it
-          easy to keep everything in one place.
-        </p>
-        <p class="about-text">
-          Our mission is to simplify the process of wish management, allowing you to focus on what truly
-          matters - making your dreams come true. MyWish is your perfect companion for all your wishlist needs.
-        </p>
-      </div>
 
-      <div class="about-card">
-        <h2 class="section-title">Our Team</h2>
-        <div class="team-grid">
-          <div class="team-member">
-            <h3 class="team-name">Group 6</h3>
-            <p class="team-role">Founder & CEO</p>
-          </div>
-          <div class="team-member">
-            <h3 class="team-name">Group 6</h3>
-            <p class="team-role">Lead Developer</p>
-          </div>
-          <div class="team-member">
-            <h3 class="team-name">Group 6</h3>
-            <p class="team-role">UX Designer</p>
+        <!-- About section -->
+        <div class="about-card">
+          <h2 class="section-title">About MyWish</h2>
+          <p class="about-text">
+            MyWish is a simple yet powerful wishlist manager designed to help you organize and track your wishes
+            for any occasion. Whether it's for birthdays, holidays, or just everyday desires, MyWish makes it
+            easy to keep everything in one place.
+          </p>
+          <p class="about-text">
+            Our mission is to simplify the process of wish management, allowing you to focus on what truly
+            matters - making your dreams come true. MyWish is your perfect companion for all your wishlist needs.
+          </p>
+        </div>
+
+        <!-- Team section -->
+        <div class="about-card">
+          <h2 class="section-title">Our Team</h2>
+          <div class="team-grid">
+            <div class="team-member">
+              <h3 class="team-name">Group 6</h3>
+              <p class="team-role">Founder & CEO</p>
+            </div>
+            <div class="team-member">
+              <h3 class="team-name">Group 6</h3>
+              <p class="team-role">Lead Developer</p>
+            </div>
+            <div class="team-member">
+              <h3 class="team-name">Group 6</h3>
+              <p class="team-role">UX Designer</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="about-card">
-        <h2 class="section-title">Contact Us</h2>
-        <div class="contact-info">
-          <div class="contact-item">
-            <span class="contact-icon">📧</span>
-            <span>contact@mywishapp.com</span>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">📱</span>
-            <span>+45 12 34 56 XX</span>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">🏢</span>
-            <span>123 Wish Street, Dream City, MyWish</span>
+        <!-- Contact section -->
+        <div class="about-card">
+          <h2 class="section-title">Contact Us</h2>
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="contact-icon">📧</span>
+              <span>contact@mywishapp.com</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📱</span>
+              <span>+45 12 34 56 XX</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">🏢</span>
+              <span>123 Wish Street, Dream City, MyWish</span>
+            </div>
           </div>
         </div>
+
       </div>
-    </div>
+
+      <!-- From Fragments -->
       <aside th:insert="~{fragments :: advert}" class="sidebar"></aside>
+
     </div>
   </main>
 
+  <!-- From Fragments -->
   <footer th:insert="~{fragments :: footer}"></footer>
+
 </div>
 </body>
 </html>
