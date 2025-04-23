@@ -33,15 +33,15 @@ public class WishListController {
 
         var wishLists = new ArrayList<WishList>();
         if(user!=null){
-            wishLists.addAll(repo.getWishLists(user.getId()));
-            for (int i = 0; i < wishLists.size(); i++) {
+            wishLists.addAll(repo.getWishLists(user.getId())); // gets all WishLists of the model "WishList"
+            for (int i = 0; i < wishLists.size(); i++) { // i is the current WishList
                 wishLists.get(i).setWishes(repo.getWishList(wishLists.get(i).getListId()));
 
                 ArrayList<Wish> list = wishLists.get(i).getWishes();
-                while (list.size() > 3) {
+                while (list.size() > 3) { // deletes a wish until 3 elements
                     list.remove(list.size() - 1);
                 }
-                wishLists.get(i).setWishes(list);
+                wishLists.get(i).setWishes(list); // sets the wishes to the 3 elements
             }
             model.addAttribute("wishLists",wishLists);
         }
@@ -51,7 +51,7 @@ public class WishListController {
     }
 
 
-
+        // The page for inserting the title
     @GetMapping("/getCreateWishList")
     public String getCreateWishList(Model model,HttpServletRequest request) {
         HttpSession session = request.getSession(false);
@@ -62,6 +62,8 @@ public class WishListController {
     }
 
 
+    // the Logic for when you insert a title, and the methods calls to make related things in the database
+
     @GetMapping("/saveCreateWishList")
     public String postCreateWishlist(HttpServletRequest request, @RequestParam("title") String title ) throws SQLException {
 
@@ -71,14 +73,12 @@ public class WishListController {
             user = (User)session.getAttribute("activeUser");
         }
 
-        int listId = repo.createWishlist(user.getId(),title); //makes all necessary logic for creating something in this database. works with my lucas.sql
-
-//        ArrayList<Wish> wishList = new ArrayList<>();
-//        wishList.add(new Wish(repo.getNextWishId(),"t2"));
-//        WishList wishListInstance = new WishList(title,listId,wishList);
-//        repo.saveWishlist(1,listId,wishListInstance); //saves a dummy
+      repo.createWishlist(user.getId(),title); //makes all necessary logic for creating something in this database. works with my lucas.sql
         return "redirect:/Profile";
     }
+
+
+    // for a button to be able to del a wishlist from an saved listId saved in session as id
     @GetMapping("/deleteWishList")
     public String deleteWishList(HttpServletRequest request) throws SQLException {
         HttpSession session = request.getSession(false);
@@ -87,12 +87,12 @@ public class WishListController {
             user = (User)session.getAttribute("activeUser");
         }
         assert session != null;
-        int listId = (int) session.getAttribute("id");
+        int listId = (int) session.getAttribute("id"); // here is the id
 
-        repo.deleteWishlist(listId);
+        repo.deleteWishlist(listId); // del based on id
 
 
-        return "redirect:/Profile";
+        return "redirect:/Profile"; // redirect to profiles which views all current users wishlists
     }
 
 }
